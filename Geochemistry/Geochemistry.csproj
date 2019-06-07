@@ -1,0 +1,180 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProductVersion>9.0.30729</ProductVersion>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{F0B29CD2-62E3-4BF9-BA2C-AC77873E4CC6}</ProjectGuid>
+    <OutputType>WinExe</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>Geochemistry</RootNamespace>
+    <AssemblyName>Geochemistry</AssemblyName>
+    <TargetFrameworkVersion>v3.5</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <FileUpgradeFlags>
+    </FileUpgradeFlags>
+    <UpgradeBackupLocation>
+    </UpgradeBackupLocation>
+    <OldToolsVersion>3.5</OldToolsVersion>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <PlatformTarget>x86</PlatformTarget>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="Microsoft.Office.Interop.Excel, Version=11.0.0.0, Culture=neutral, PublicKeyToken=71e9bce111e9429c" />
+    <Reference Include="System" />
+    <Reference Include="System.configuration" />
+    <Reference Include="System.Core">
+      <RequiredTargetFramework>3.5</RequiredTargetFramework>
+    </Reference>
+    <Reference Include="System.Web.Extensions">
+      <RequiredTargetFramework>3.5</RequiredTargetFramework>
+    </Reference>
+    <Reference Include="System.Xml.Linq">
+      <RequiredTargetFramework>3.5</RequiredTargetFramework>
+    </Reference>
+    <Reference Include="System.Data.DataSetExtensions">
+      <RequiredTargetFramework>3.5</RequiredTargetFramework>
+    </Reference>
+    <Reference Include="System.Data" />
+    <Reference Include="System.Deployment" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Windows.Forms" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="frmChangeLoggin.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frmChangeLoggin.designer.cs">
+      <DependentUpon>frmChangeLoggin.cs</DependentUpon>
+    </Compile>
+    <Compile Include="frmChannels.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frmChannels.Designer.cs">
+      <DependentUpon>frmChannels.cs</DependentUpon>
+    </Compile>
+    <Compile Include="frmLogin.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frmLogin.designer.cs">
+      <DependentUpon>frmLogin.cs</DependentUpon>
+    </Compile>
+    <Compile Include="frmMine.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frmMine.Designer.cs">
+      <DependentUpon>frmMine.cs</DependentUpon>
+    </Compile>
+    <Compile Include="frmPpal.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frmPpal.Designer.cs">
+      <DependentUpon>frmPpal.cs</DependentUpon>
+    </Compile>
+    <Compile Include="frmRock.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frmRock.Designer.cs">
+      <DependentUpon>frmRock.cs</DependentUpon>
+    </Compile>
+    <Compile Include="frmSediments.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frmSediments.Designer.cs">
+      <DependentUpon>frmSediments.cs</DependentUpon>
+    </Compile>
+    <Compile Include="frmSoil.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frmSoil.Designer.cs">
+      <DependentUpon>frmSoil.cs</DependentUpon>
+    </Compile>
+    <Compile Include="frmSplash.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frmSplash.designer.cs">
+      <DependentUpon>frmSplash.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Program.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <EmbeddedResource Include="frmChangeLoggin.resx">
+      <DependentUpon>frmChangeLoggin.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="frmChannels.resx">
+      <DependentUpon>frmChannels.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="frmLogin.resx">
+      <DependentUpon>frmLogin.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="frmMine.resx">
+      <DependentUpon>frmMine.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="frmPpal.resx">
+      <DependentUpon>frmPpal.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="frmRock.resx">
+      <DependentUpon>frmRock.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="frmSediments.resx">
+      <DependentUpon>frmSediments.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="frmSoil.resx">
+      <DependentUpon>frmSoil.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="frmSplash.resx">
+      <DependentUpon>frmSplash.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Properties\Resources.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>Resources.Designer.cs</LastGenOutput>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <Compile Include="Properties\Resources.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Resources.resx</DependentUpon>
+      <DesignTime>True</DesignTime>
+    </Compile>
+    <None Include="App.config" />
+    <None Include="Properties\Settings.settings">
+      <Generator>SettingsSingleFileGenerator</Generator>
+      <LastGenOutput>Settings.Designer.cs</LastGenOutput>
+    </None>
+    <Compile Include="Properties\Settings.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Settings.settings</DependentUpon>
+      <DesignTimeSharedInput>True</DesignTimeSharedInput>
+    </Compile>
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\RN\RN.csproj">
+      <Project>{12FFC622-7E92-40C8-8F8D-C334F25CA714}</Project>
+      <Name>RN</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>
