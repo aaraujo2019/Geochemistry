@@ -922,13 +922,13 @@ namespace Geochemistry
 
                 dtStartDateCh.Text =
                     dgDataCh.Rows[e.RowIndex].Cells["Star_Date"].Value.ToString() == ""
-                    ? "1900/01/01"
-                    : dtStartDateCh.Text = dgDataCh.Rows[e.RowIndex].Cells["Star_Date"].Value.ToString();
+                    ? DateTime.Now.ToShortDateString()
+                    : dtStartDateCh.Text = Convert.ToDateTime(dgDataCh.Rows[e.RowIndex].Cells["Star_Date"].Value).ToString("dd/MM/yyyy");
 
                 dtFinalDateCh.Text =
                     dgDataCh.Rows[e.RowIndex].Cells["Final_Date"].Value.ToString() == ""
-                    ? "1900/01/01"
-                    : dtFinalDateCh.Text = dgDataCh.Rows[e.RowIndex].Cells["Final_Date"].Value.ToString();
+                    ? DateTime.Now.ToShortDateString()
+                    : dtFinalDateCh.Text = Convert.ToDateTime(dgDataCh.Rows[e.RowIndex].Cells["Final_Date"].Value).ToString("dd/MM/yyyy");
 
                 //txtPurposeCh.Text = dgDataCh.Rows[e.RowIndex].Cells["Purpose"].Value.ToString();
                 txtStorageCh.Text = dgDataCh.Rows[e.RowIndex].Cells["Storage"].Value.ToString();
@@ -947,8 +947,8 @@ namespace Geochemistry
 
                 dTimerDateSur.Text =
                    dgDataCh.Rows[e.RowIndex].Cells["Date_Survey"].Value.ToString() == ""
-                   ? "1900/01/01"
-                   : dTimerDateSur.Text = dgDataCh.Rows[e.RowIndex].Cells["Date_Survey"].Value.ToString();
+                   ? DateTime.Now.ToShortDateString()
+                   : dTimerDateSur.Text = Convert.ToDateTime(dgDataCh.Rows[e.RowIndex].Cells["Date_Survey"].Value).ToString("dd/MM/yyyy");
 
 
                 txtTotalSamples.Text = dgDataCh.Rows[e.RowIndex].Cells["SamplesTotal"].Value.ToString();
@@ -1009,7 +1009,7 @@ namespace Geochemistry
                 txtToSur.Text = "";
                 txtAzimuthSur.Text = "";
                 txtDipSur.Text = "";
-                dTimerDateSur.Text = "1900/01/01";
+                dTimerDateSur.Text = "01/01/1990";
                 cmbInstSur.Text = "";
                 cmbMineLocation.Text = "";
                 txtP1E.Text = "";
@@ -4202,10 +4202,81 @@ namespace Geochemistry
             }
         }
 
-       
+        private void txtChId_Leave(object sender, EventArgs e)
+        {
+            foreach (DataGridViewRow Row in dgDataCh.Rows)
+            {
+                var strFila = Row.Index;
+                string Valor = Convert.ToString(Row.Cells[1].Value);
 
-       
+                if (Valor == txtChId.Text.ToUpper())
+                {
+                    BuscarChannerPorId(strFila);
+                }
+            }
+        }
 
-       
+        private void BuscarChannerPorId(int index)
+        {
+            try
+            {
+
+                oCh.iSKCHChannels = Int64.Parse(dgDataCh.Rows[index].Cells["SKCHChannels"].Value.ToString());
+                sEditCh = "1";
+
+                cmbChannelId.SelectedValue = dgDataCh.Rows[index].Cells["Chid"].Value.ToString();
+                txtChId.Text = dgDataCh.Rows[index].Cells["Chid"].Value.ToString();
+                txtLenghtCh.Text = dgDataCh.Rows[index].Cells["Length"].Value.ToString();
+                txtEastCh.Text = dgDataCh.Rows[index].Cells["East"].Value.ToString();
+                txtNorthCh.Text = dgDataCh.Rows[index].Cells["North"].Value.ToString();
+                txtElevationCh.Text = dgDataCh.Rows[index].Cells["Elevation"].Value.ToString();
+                txtProjectionCh.Text = dgDataCh.Rows[index].Cells["Projection"].Value.ToString();
+                txtDatumCh.Text = dgDataCh.Rows[index].Cells["Datum"].Value.ToString();
+                txtProjectCh.Text = dgDataCh.Rows[index].Cells["Project"].Value.ToString();
+                txtClaimCh.Text = dgDataCh.Rows[index].Cells["Claim"].Value.ToString();
+
+                dtStartDateCh.Text =
+                    dgDataCh.Rows[index].Cells["Star_Date"].Value.ToString() == string.Empty
+                    ? DateTime.Now.ToShortDateString()
+                    : dtStartDateCh.Text = Convert.ToDateTime(dgDataCh.Rows[index].Cells["Star_Date"].Value).ToString("dd/MM/yyyy");
+
+                dtFinalDateCh.Text =
+                    dgDataCh.Rows[index].Cells["Final_Date"].Value.ToString() == string.Empty
+                    ? DateTime.Now.ToShortDateString()
+                    : dtFinalDateCh.Text = Convert.ToDateTime(dgDataCh.Rows[index].Cells["Final_Date"].Value).ToString("dd/MM/yyyy");
+
+                //txtPurposeCh.Text = dgDataCh.Rows[index].Cells["Purpose"].Value.ToString();
+                txtStorageCh.Text = dgDataCh.Rows[index].Cells["Storage"].Value.ToString();
+                txtSourceCh.Text = dgDataCh.Rows[index].Cells["Source"].Value.ToString();
+
+                txtCommentsCh.Text = dgDataCh.Rows[index].Cells["Comments"].Value.ToString();
+
+                cmbMineEntrance.SelectedValue = dgDataCh.Rows[index].Cells["MineID"].Value.ToString() == "" ? "-1" :
+                    dgDataCh.Rows[index].Cells["MineID"].Value.ToString();
+
+                cmbChannelType.SelectedValue = dgDataCh.Rows[index].Cells["Type"].Value.ToString() == "" ? "-1" :
+                    dgDataCh.Rows[index].Cells["Type"].Value.ToString();
+
+                cmbInstSur.Text = dgDataCh.Rows[index].Cells["Instrument"].Value.ToString() == "" ? "TS" :
+                    dgDataCh.Rows[index].Cells["Instrument"].Value.ToString();
+
+                dTimerDateSur.Text =
+                   dgDataCh.Rows[index].Cells["Date_Survey"].Value.ToString() == string.Empty
+                   ? DateTime.Now.ToShortDateString()
+                   : dTimerDateSur.Text = Convert.ToDateTime(dgDataCh.Rows[index].Cells["Date_Survey"].Value).ToString("dd/MM/yyyy");
+
+
+                txtTotalSamples.Text = dgDataCh.Rows[index].Cells["SamplesTotal"].Value.ToString();
+
+
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
+        }
+
+
+
     }
 }

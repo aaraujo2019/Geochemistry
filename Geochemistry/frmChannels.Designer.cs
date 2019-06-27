@@ -29,16 +29,16 @@
         private void InitializeComponent()
         {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(frmChannels));
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle4 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle5 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle6 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle7 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle8 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle9 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle10 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle11 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle12 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle13 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle14 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle15 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle16 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle17 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle18 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle19 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle20 = new System.Windows.Forms.DataGridViewCellStyle();
             this.pictureBox1 = new System.Windows.Forms.PictureBox();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
             this.pbGeochemistry = new System.Windows.Forms.ProgressBar();
@@ -583,7 +583,7 @@
             this.groupBox2.Controls.Add(this.label1);
             this.groupBox2.Location = new System.Drawing.Point(5, 7);
             this.groupBox2.Name = "groupBox2";
-            this.groupBox2.Size = new System.Drawing.Size(699, 432);
+            this.groupBox2.Size = new System.Drawing.Size(699, 424);
             this.groupBox2.TabIndex = 0;
             this.groupBox2.TabStop = false;
             // 
@@ -606,7 +606,7 @@
             // 
             // dTimerDateSur
             // 
-            this.dTimerDateSur.CustomFormat = "MM/dd/yyyy";
+            this.dTimerDateSur.CustomFormat = "dd/MM/yyyy";
             this.dTimerDateSur.Format = System.Windows.Forms.DateTimePickerFormat.Custom;
             this.dTimerDateSur.Location = new System.Drawing.Point(570, 77);
             this.dTimerDateSur.Name = "dTimerDateSur";
@@ -684,16 +684,17 @@
             this.txtChId.Name = "txtChId";
             this.txtChId.Size = new System.Drawing.Size(85, 20);
             this.txtChId.TabIndex = 8;
+            this.txtChId.Leave += new System.EventHandler(this.txtChId_Leave);
             // 
             // dgDataCh
             // 
-            dataGridViewCellStyle1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(192)))));
-            this.dgDataCh.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle1;
+            dataGridViewCellStyle11.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(192)))));
+            this.dgDataCh.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle11;
             this.dgDataCh.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dgDataCh.Location = new System.Drawing.Point(8, 186);
             this.dgDataCh.Name = "dgDataCh";
             this.dgDataCh.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.dgDataCh.Size = new System.Drawing.Size(686, 240);
+            this.dgDataCh.Size = new System.Drawing.Size(686, 228);
             this.dgDataCh.TabIndex = 52;
             this.dgDataCh.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgDataCh_CellClick);
             this.dgDataCh.CellDoubleClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgDataCh_CellDoubleClick);
@@ -777,7 +778,7 @@
             // 
             // dtFinalDateCh
             // 
-            this.dtFinalDateCh.CustomFormat = "MM/dd/yyyy";
+            this.dtFinalDateCh.CustomFormat = "dd/MM/yyyy";
             this.dtFinalDateCh.Format = System.Windows.Forms.DateTimePickerFormat.Custom;
             this.dtFinalDateCh.Location = new System.Drawing.Point(454, 77);
             this.dtFinalDateCh.Name = "dtFinalDateCh";
@@ -796,7 +797,7 @@
             // 
             // dtStartDateCh
             // 
-            this.dtStartDateCh.CustomFormat = "MM/dd/yyyy";
+            this.dtStartDateCh.CustomFormat = "dd/MM/yyyy";
             this.dtStartDateCh.Format = System.Windows.Forms.DateTimePickerFormat.Custom;
             this.dtStartDateCh.Location = new System.Drawing.Point(339, 77);
             this.dtStartDateCh.Name = "dtStartDateCh";
@@ -1034,7 +1035,7 @@
             this.chkValidated.AutoSize = true;
             this.chkValidated.Location = new System.Drawing.Point(594, 28);
             this.chkValidated.Name = "chkValidated";
-            this.chkValidated.Size = new System.Drawing.Size(79, 17);
+            this.chkValidated.Size = new System.Drawing.Size(78, 17);
             this.chkValidated.TabIndex = 349;
             this.chkValidated.Text = "Validated";
             this.chkValidated.UseVisualStyleBackColor = true;
@@ -1070,7 +1071,7 @@
             this.label113.AutoSize = true;
             this.label113.Location = new System.Drawing.Point(220, 11);
             this.label113.Name = "label113";
-            this.label113.Size = new System.Drawing.Size(26, 13);
+            this.label113.Size = new System.Drawing.Size(25, 13);
             this.label113.TabIndex = 348;
             this.label113.Text = "To:";
             // 
@@ -1111,8 +1112,8 @@
             // 
             // dgData
             // 
-            dataGridViewCellStyle2.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(192)))));
-            this.dgData.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle2;
+            dataGridViewCellStyle12.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(192)))));
+            this.dgData.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle12;
             this.dgData.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dgData.Location = new System.Drawing.Point(3, 424);
             this.dgData.Name = "dgData";
@@ -1330,7 +1331,7 @@
             this.label67.AutoSize = true;
             this.label67.Location = new System.Drawing.Point(91, 3);
             this.label67.Name = "label67";
-            this.label67.Size = new System.Drawing.Size(82, 13);
+            this.label67.Size = new System.Drawing.Size(81, 13);
             this.label67.TabIndex = 274;
             this.label67.Text = "Sample Type";
             // 
@@ -1505,7 +1506,7 @@
             this.label106.AutoSize = true;
             this.label106.Location = new System.Drawing.Point(10, 52);
             this.label106.Name = "label106";
-            this.label106.Size = new System.Drawing.Size(53, 13);
+            this.label106.Size = new System.Drawing.Size(52, 13);
             this.label106.TabIndex = 2;
             this.label106.Text = "Target: ";
             // 
@@ -1696,7 +1697,7 @@
             this.label109.AutoSize = true;
             this.label109.Location = new System.Drawing.Point(38, 2);
             this.label109.Name = "label109";
-            this.label109.Size = new System.Drawing.Size(83, 13);
+            this.label109.Size = new System.Drawing.Size(82, 13);
             this.label109.TabIndex = 336;
             this.label109.Text = "Contact Type";
             // 
@@ -1714,7 +1715,7 @@
             this.label111.AutoSize = true;
             this.label111.Location = new System.Drawing.Point(176, 2);
             this.label111.Name = "label111";
-            this.label111.Size = new System.Drawing.Size(69, 13);
+            this.label111.Size = new System.Drawing.Size(68, 13);
             this.label111.TabIndex = 338;
             this.label111.Text = "Vein Name";
             // 
@@ -1923,8 +1924,8 @@
             // 
             // dgSurvey
             // 
-            dataGridViewCellStyle3.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(192)))));
-            this.dgSurvey.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle3;
+            dataGridViewCellStyle13.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(192)))));
+            this.dgSurvey.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle13;
             this.dgSurvey.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dgSurvey.Location = new System.Drawing.Point(12, 147);
             this.dgSurvey.Name = "dgSurvey";
@@ -2019,8 +2020,8 @@
             // 
             // dgLithology
             // 
-            dataGridViewCellStyle4.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(192)))));
-            this.dgLithology.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle4;
+            dataGridViewCellStyle14.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(192)))));
+            this.dgLithology.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle14;
             this.dgLithology.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dgLithology.Location = new System.Drawing.Point(7, 444);
             this.dgLithology.Name = "dgLithology";
@@ -2219,7 +2220,7 @@
             this.label20.AutoSize = true;
             this.label20.Location = new System.Drawing.Point(499, 2);
             this.label20.Name = "label20";
-            this.label20.Size = new System.Drawing.Size(77, 13);
+            this.label20.Size = new System.Drawing.Size(76, 13);
             this.label20.TabIndex = 350;
             this.label20.Text = "Weathering:";
             // 
@@ -2237,7 +2238,7 @@
             this.label90.AutoSize = true;
             this.label90.Location = new System.Drawing.Point(203, 2);
             this.label90.Name = "label90";
-            this.label90.Size = new System.Drawing.Size(62, 13);
+            this.label90.Size = new System.Drawing.Size(61, 13);
             this.label90.TabIndex = 348;
             this.label90.Text = "Textures:";
             // 
@@ -2374,8 +2375,8 @@
             // 
             // dgLithMatrix
             // 
-            dataGridViewCellStyle5.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(192)))));
-            this.dgLithMatrix.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle5;
+            dataGridViewCellStyle15.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(192)))));
+            this.dgLithMatrix.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle15;
             this.dgLithMatrix.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dgLithMatrix.Location = new System.Drawing.Point(3, 116);
             this.dgLithMatrix.Name = "dgLithMatrix";
@@ -2500,8 +2501,8 @@
             // 
             // dgLithPheno
             // 
-            dataGridViewCellStyle6.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(192)))));
-            this.dgLithPheno.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle6;
+            dataGridViewCellStyle16.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(192)))));
+            this.dgLithPheno.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle16;
             this.dgLithPheno.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dgLithPheno.Location = new System.Drawing.Point(3, 116);
             this.dgLithPheno.Name = "dgLithPheno";
@@ -2575,8 +2576,8 @@
             // 
             // dgAlterations
             // 
-            dataGridViewCellStyle7.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(192)))));
-            this.dgAlterations.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle7;
+            dataGridViewCellStyle17.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(192)))));
+            this.dgAlterations.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle17;
             this.dgAlterations.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dgAlterations.Location = new System.Drawing.Point(4, 163);
             this.dgAlterations.Name = "dgAlterations";
@@ -2787,8 +2788,8 @@
             // 
             // dgMineralizations
             // 
-            dataGridViewCellStyle8.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(192)))));
-            this.dgMineralizations.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle8;
+            dataGridViewCellStyle18.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(192)))));
+            this.dgMineralizations.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle18;
             this.dgMineralizations.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dgMineralizations.Location = new System.Drawing.Point(6, 136);
             this.dgMineralizations.Name = "dgMineralizations";
@@ -2958,8 +2959,8 @@
             // 
             // dgOxides
             // 
-            dataGridViewCellStyle9.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(192)))));
-            this.dgOxides.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle9;
+            dataGridViewCellStyle19.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(192)))));
+            this.dgOxides.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle19;
             this.dgOxides.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dgOxides.Location = new System.Drawing.Point(6, 144);
             this.dgOxides.Name = "dgOxides";
@@ -3256,8 +3257,8 @@
             // 
             // dgStructures
             // 
-            dataGridViewCellStyle10.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(192)))));
-            this.dgStructures.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle10;
+            dataGridViewCellStyle20.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(192)))));
+            this.dgStructures.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle20;
             this.dgStructures.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dgStructures.Location = new System.Drawing.Point(7, 151);
             this.dgStructures.Name = "dgStructures";
