@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.Configuration;
 using System.Data;
+using System.Drawing;
 using System.Globalization;
 using System.Linq;
 using System.Threading;
@@ -287,8 +288,9 @@ namespace Geochemistry
                 #endregion
 
                 DataTable dtData = LoadDataRocksAll("2");
-                dgData.DataSource = dtData;//LoadDataRocks(txtSample.Text.ToString());
-                dgData.Columns["SKSamplesRock"].Visible = false;
+                dgData.DataSource = dtData;
+                LoadDataRocks(txtSample.Text.ToString());
+                //dgData.Columns["SKSamplesRock"].Visible = false;
 
 
 
@@ -2406,9 +2408,8 @@ namespace Geochemistry
                     boundTable = null;
                     dgLithology.DataSource = boundTable;//LoadDataRocks(txtSample.Text.ToString());
                 }
-                
 
-                
+                cmbSample_Leave(null, null);
             }
             catch (Exception ex)
             {
@@ -3188,7 +3189,193 @@ namespace Geochemistry
                 MessageBox.Show(ex.Message);
             }
         }
-       
-        
+
+
+        /// <summary>
+        /// Modificación Alvaro Araujo
+        /// 03/07/2019
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+
+        private void cmbSample_Leave(object sender, EventArgs e)
+        {
+            if (!cmbSample.Text.Contains("Select"))
+            {
+                LoadDataRocks(cmbSample.Text);
+
+                foreach (DataGridViewRow Row in dgData.Rows)
+                {
+                    var strFila = Row.Index;
+                    string Valor = Convert.ToString(Row.Cells[1].Value);
+
+                    if (Valor == cmbSample.Text.ToUpper())
+                    {
+                        BuscarChannerPorId(strFila);
+                    }
+                }
+            }
+        }
+
+        private void BuscarChannerPorId(int strFila)
+        {
+            try
+            {
+                oGCRock.iSKSamplesRock = int.Parse(dgData.Rows[strFila].Cells["SKSamplesRock"].Value.ToString());
+                sEdit = "1";
+
+                DateTime dDate =
+                    dgData.Rows[strFila].Cells["Date"].Value.ToString() == ""
+                    ? DateTime.Parse("1900/01/01")
+                    : DateTime.Parse(dgData.Rows[strFila].Cells["Date"].Value.ToString());
+                dtimeDate.Value = dDate;
+                dtimeDate.Text = dgData.Rows[strFila].Cells["Date"].Value.ToString();
+
+                txtSample.Text = dgData.Rows[strFila].Cells["Sample"].Value.ToString();
+
+                if (dgData.Rows[strFila].Cells["Target"].Value.ToString() == "")
+                    cmbTarget.SelectedValue = "-1";
+                else cmbTarget.SelectedValue = dgData.Rows[strFila].Cells["Target"].Value.ToString();
+
+                txtLocation.Text = dgData.Rows[strFila].Cells["Location"].Value.ToString();
+                txtProject.Text = dgData.Rows[strFila].Cells["Project"].Value.ToString();
+
+                if (dgData.Rows[strFila].Cells["Geologist"].Value.ToString() == "")
+                    cmbGeologist.SelectedValue = "-1";
+                else cmbGeologist.SelectedValue = dgData.Rows[strFila].Cells["Geologist"].Value.ToString();
+
+                txtHelper.Text = dgData.Rows[strFila].Cells["Helper"].Value.ToString();
+                txtStation.Text = dgData.Rows[strFila].Cells["Station"].Value.ToString();
+                txtCoordE.Text = dgData.Rows[strFila].Cells["E"].Value.ToString();
+                txtCoordN.Text = dgData.Rows[strFila].Cells["N"].Value.ToString();
+                txtCoordElevation.Text = dgData.Rows[strFila].Cells["Z"].Value.ToString();
+
+                if (dgData.Rows[strFila].Cells["CS"].Value.ToString() == "")
+                    cmbCS.SelectedValue = "-1";
+                else cmbCS.SelectedValue = dgData.Rows[strFila].Cells["CS"].Value.ToString();
+
+                txtGPSEPE.Text = dgData.Rows[strFila].Cells["GPSepe"].Value.ToString();
+                txtPhoto.Text = dgData.Rows[strFila].Cells["Photo"].Value.ToString();
+                txtPhotoAzimuth.Text = dgData.Rows[strFila].Cells["Photo_azimuth"].Value.ToString();
+
+                if (dgData.Rows[strFila].Cells["SampleType"].Value.ToString() == "")
+                    cmbSampleType.SelectedValue = "-1";
+                else cmbSampleType.SelectedValue = dgData.Rows[strFila].Cells["SampleType"].Value.ToString();
+
+                if (dgData.Rows[strFila].Cells["NotItSitu"].Value.ToString() == "")
+                    cmbNotInSitu.SelectedValue = "-1";
+                else cmbNotInSitu.SelectedValue = dgData.Rows[strFila].Cells["NotItSitu"].Value.ToString();
+
+                if (dgData.Rows[strFila].Cells["Porpuose"].Value.ToString() == "")
+                    cmbPorpuose.SelectedValue = "-1";
+                else cmbPorpuose.SelectedValue = dgData.Rows[strFila].Cells["Porpuose"].Value.ToString();
+
+                if (dgData.Rows[strFila].Cells["Relative_Loc"].Value.ToString() == "")
+                    cmbRelativeLoc.SelectedValue = "-1";
+                else cmbRelativeLoc.SelectedValue = dgData.Rows[strFila].Cells["Relative_Loc"].Value.ToString();
+
+                txtLenght.Text = dgData.Rows[strFila].Cells["length"].Value.ToString();
+                txtHigh.Text = dgData.Rows[strFila].Cells["High"].Value.ToString();
+                txtThickness.Text = dgData.Rows[strFila].Cells["Thickness"].Value.ToString();
+                txtObservations.Text = dgData.Rows[strFila].Cells["Obsevations"].Value.ToString();
+
+                if (dgData.Rows[strFila].Cells["LRock"].Value.ToString() == "")
+                    cmbLithologyLit.SelectedValue = "-1";
+                else cmbLithologyLit.SelectedValue = dgData.Rows[strFila].Cells["LRock"].Value.ToString();
+
+                if (dgData.Rows[strFila].Cells["LTexture"].Value.ToString() == "")
+                    cmbLTextures.SelectedValue = "-1";
+                else cmbLTextures.SelectedValue = dgData.Rows[strFila].Cells["LTexture"].Value.ToString();
+
+                if (dgData.Rows[strFila].Cells["LGSize"].Value.ToString() == "")
+                    cmbLGsize.SelectedValue = "-1";
+                else cmbLGsize.SelectedValue = dgData.Rows[strFila].Cells["LGSize"].Value.ToString();
+
+                if (dgData.Rows[strFila].Cells["LWeathering"].Value.ToString() == "")
+                    cmbLWeathering.SelectedValue = "-1";
+                else cmbLWeathering.SelectedValue = dgData.Rows[strFila].Cells["LWeathering"].Value.ToString();
+
+                if (dgData.Rows[strFila].Cells["LRocksSorting"].Value.ToString() == "")
+                    cmbRSorting.SelectedValue = "-1";
+                else cmbRSorting.SelectedValue = dgData.Rows[strFila].Cells["LRocksSorting"].Value.ToString();
+
+                if (dgData.Rows[strFila].Cells["LRocksSphericity"].Value.ToString() == "")
+                    cmbRSphericity.SelectedValue = "-1";
+                else cmbRSphericity.SelectedValue = dgData.Rows[strFila].Cells["LRocksSphericity"].Value.ToString();
+
+                if (dgData.Rows[strFila].Cells["LRocksRounding"].Value.ToString() == "")
+                    cmbRounding.SelectedValue = "-1";
+                else cmbRounding.SelectedValue = dgData.Rows[strFila].Cells["LRocksRounding"].Value.ToString();
+
+                txtObservSedimentary.Text = dgData.Rows[strFila].Cells["LRocksObservation"].Value.ToString();
+
+                if (dgData.Rows[strFila].Cells["LMatrixPerc"].Value.ToString() == "")
+                    cmbMatrixPorc.SelectedValue = "-1";
+                else cmbMatrixPorc.SelectedValue = dgData.Rows[strFila].Cells["LMatrixPerc"].Value.ToString();
+
+                if (dgData.Rows[strFila].Cells["LMatrixGSize"].Value.ToString() == "")
+                    cmbMatrixGSize.SelectedValue = "-1";
+                else cmbMatrixGSize.SelectedValue = dgData.Rows[strFila].Cells["LMatrixGSize"].Value.ToString();
+
+                txtMatrixObserv.Text = dgData.Rows[strFila].Cells["LMatrixObsevations"].Value.ToString();
+
+                if (dgData.Rows[strFila].Cells["LPhenoCPerc"].Value.ToString() == "")
+                    cmbPhenoPerc.SelectedValue = "-1";
+                else cmbPhenoPerc.SelectedValue = dgData.Rows[strFila].Cells["LPhenoCPerc"].Value.ToString();
+
+                if (dgData.Rows[strFila].Cells["LPhenoCGSize"].Value.ToString() == "")
+                    cmbPhenoGSize.SelectedValue = "-1";
+                else cmbPhenoGSize.SelectedValue = dgData.Rows[strFila].Cells["LPhenoCGSize"].Value.ToString();
+
+                txtPhenoObserv.Text = dgData.Rows[strFila].Cells["LPhenoCObsevations"].Value.ToString();
+
+                if (dgData.Rows[strFila].Cells["VContactType"].Value.ToString() == "")
+                    cmbContactType.SelectedValue = "-1";
+                else
+                    cmbContactType.SelectedValue = dgData.Rows[strFila].Cells["VContactType"].Value.ToString();
+
+                if (dgData.Rows[strFila].Cells["VVeinName"].Value.ToString() == "")
+                    cmbPhenoGSize.SelectedValue = "-1";
+                else
+                    cmbVeinName.SelectedValue = dgData.Rows[strFila].Cells["VVeinName"].Value.ToString();
+
+                if (dgData.Rows[strFila].Cells["VHostRock"].Value.ToString() == "")
+                    cmbHostRock.SelectedValue = "-1";
+                else
+                    cmbHostRock.SelectedValue = dgData.Rows[strFila].Cells["VHostRock"].Value.ToString();
+
+                txtVeinObserv.Text = dgData.Rows[strFila].Cells["VObsevations"].Value.ToString();
+
+                if (dgData.Rows[strFila].Cells["SamplingType"].Value.ToString() == "")
+                    cmbSamplingType.SelectedValue = "-1";
+                else cmbSamplingType.SelectedValue = dgData.Rows[strFila].Cells["SamplingType"].Value.ToString();
+
+                txtDupOf.Text = dgData.Rows[strFila].Cells["DupOf"].Value.ToString();
+
+
+                //sMineLoc
+                if (dgData.Rows[strFila].Cells["SamplingType"].Value.ToString() != "")
+                {
+                    if (dgData.Rows[strFila].Cells["SamplingType"].Value.ToString().Substring(0, 1) == "O")
+                    {
+                        bMineLocation(false);
+                        txtMineLocation.Text = dgData.Rows[strFila].Cells["Mine"].Value.ToString();
+                    }
+                    else
+                    {
+                        bMineLocation(true);
+                        LoadCmbMineLocation();
+                        cmbMineLocation.SelectedValue = dgData.Rows[strFila].Cells["Mine"].Value.ToString()
+                            == ""
+                            ? "Select an option..."
+                            : dgData.Rows[strFila].Cells["Mine"].Value.ToString();
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
+        }
     }
 }

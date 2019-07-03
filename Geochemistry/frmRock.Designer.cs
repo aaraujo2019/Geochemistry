@@ -29,14 +29,14 @@
         private void InitializeComponent()
         {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(frmRock));
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle26 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle27 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle28 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle29 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle30 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle25 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle31 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle32 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle4 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle5 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle6 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle7 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle8 = new System.Windows.Forms.DataGridViewCellStyle();
             this.pictureBox1 = new System.Windows.Forms.PictureBox();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
             this.pbGeochemistry = new System.Windows.Forms.ProgressBar();
@@ -189,6 +189,7 @@
             this.groupBox8 = new System.Windows.Forms.GroupBox();
             this.dgSamplesRockMin = new System.Windows.Forms.DataGridView();
             this.panel11 = new System.Windows.Forms.Panel();
+            this.txtMinPerc = new System.Windows.Forms.TextBox();
             this.btnCancelMin = new System.Windows.Forms.Button();
             this.btnAddMin = new System.Windows.Forms.Button();
             this.cmbMineralmin = new System.Windows.Forms.ComboBox();
@@ -263,7 +264,6 @@
             this.cmbSample = new System.Windows.Forms.ComboBox();
             this.label1 = new System.Windows.Forms.Label();
             this.bgw = new System.ComponentModel.BackgroundWorker();
-            this.txtMinPerc = new System.Windows.Forms.TextBox();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.groupBox1.SuspendLayout();
             this.TbRocks.SuspendLayout();
@@ -480,16 +480,16 @@
             // 
             // dgData
             // 
-            dataGridViewCellStyle26.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(192)))));
-            this.dgData.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle26;
+            dataGridViewCellStyle1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(192)))));
+            this.dgData.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle1;
             this.dgData.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dgData.Location = new System.Drawing.Point(6, 401);
+            this.dgData.Location = new System.Drawing.Point(6, 406);
             this.dgData.Name = "dgData";
             this.dgData.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
             this.dgData.Size = new System.Drawing.Size(679, 121);
             this.dgData.TabIndex = 50;
-            this.dgData.CellDoubleClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgData_CellDoubleClick);
             this.dgData.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgData_CellClick);
+            this.dgData.CellDoubleClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgData_CellDoubleClick);
             // 
             // panel9
             // 
@@ -701,7 +701,7 @@
             this.label67.AutoSize = true;
             this.label67.Location = new System.Drawing.Point(91, 3);
             this.label67.Name = "label67";
-            this.label67.Size = new System.Drawing.Size(82, 13);
+            this.label67.Size = new System.Drawing.Size(81, 13);
             this.label67.TabIndex = 274;
             this.label67.Text = "Sample Type";
             // 
@@ -933,7 +933,7 @@
             this.label5.AutoSize = true;
             this.label5.Location = new System.Drawing.Point(116, 13);
             this.label5.Name = "label5";
-            this.label5.Size = new System.Drawing.Size(53, 13);
+            this.label5.Size = new System.Drawing.Size(52, 13);
             this.label5.TabIndex = 2;
             this.label5.Text = "Target: ";
             // 
@@ -1021,7 +1021,7 @@
             this.label102.AutoSize = true;
             this.label102.Location = new System.Drawing.Point(38, 2);
             this.label102.Name = "label102";
-            this.label102.Size = new System.Drawing.Size(83, 13);
+            this.label102.Size = new System.Drawing.Size(82, 13);
             this.label102.TabIndex = 336;
             this.label102.Text = "Contact Type";
             // 
@@ -1039,7 +1039,7 @@
             this.label103.AutoSize = true;
             this.label103.Location = new System.Drawing.Point(176, 2);
             this.label103.Name = "label103";
-            this.label103.Size = new System.Drawing.Size(69, 13);
+            this.label103.Size = new System.Drawing.Size(68, 13);
             this.label103.TabIndex = 338;
             this.label103.Text = "Vein Name";
             // 
@@ -1086,8 +1086,8 @@
             // 
             // dgLithology
             // 
-            dataGridViewCellStyle27.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(192)))));
-            this.dgLithology.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle27;
+            dataGridViewCellStyle2.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(192)))));
+            this.dgLithology.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle2;
             this.dgLithology.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dgLithology.Location = new System.Drawing.Point(6, 392);
             this.dgLithology.Name = "dgLithology";
@@ -1263,7 +1263,7 @@
             this.label20.AutoSize = true;
             this.label20.Location = new System.Drawing.Point(417, 2);
             this.label20.Name = "label20";
-            this.label20.Size = new System.Drawing.Size(77, 13);
+            this.label20.Size = new System.Drawing.Size(76, 13);
             this.label20.TabIndex = 350;
             this.label20.Text = "Weathering:";
             // 
@@ -1281,7 +1281,7 @@
             this.label90.AutoSize = true;
             this.label90.Location = new System.Drawing.Point(121, 2);
             this.label90.Name = "label90";
-            this.label90.Size = new System.Drawing.Size(62, 13);
+            this.label90.Size = new System.Drawing.Size(61, 13);
             this.label90.TabIndex = 348;
             this.label90.Text = "Textures:";
             // 
@@ -1408,16 +1408,16 @@
             // 
             // dgLithMatrix
             // 
-            dataGridViewCellStyle28.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(192)))));
-            this.dgLithMatrix.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle28;
+            dataGridViewCellStyle3.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(192)))));
+            this.dgLithMatrix.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle3;
             this.dgLithMatrix.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dgLithMatrix.Location = new System.Drawing.Point(2, 114);
             this.dgLithMatrix.Name = "dgLithMatrix";
             this.dgLithMatrix.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
             this.dgLithMatrix.Size = new System.Drawing.Size(317, 106);
             this.dgLithMatrix.TabIndex = 294;
-            this.dgLithMatrix.CellDoubleClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgLithMatrix_CellDoubleClick);
             this.dgLithMatrix.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgLithMatrix_CellClick);
+            this.dgLithMatrix.CellDoubleClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgLithMatrix_CellDoubleClick);
             // 
             // btnCancelMinMat
             // 
@@ -1535,16 +1535,16 @@
             // 
             // dgLithPheno
             // 
-            dataGridViewCellStyle29.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(192)))));
-            this.dgLithPheno.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle29;
+            dataGridViewCellStyle4.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(192)))));
+            this.dgLithPheno.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle4;
             this.dgLithPheno.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dgLithPheno.Location = new System.Drawing.Point(5, 112);
             this.dgLithPheno.Name = "dgLithPheno";
             this.dgLithPheno.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
             this.dgLithPheno.Size = new System.Drawing.Size(315, 107);
             this.dgLithPheno.TabIndex = 291;
-            this.dgLithPheno.CellDoubleClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgLithPheno_CellDoubleClick);
             this.dgLithPheno.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgLithPheno_CellClick);
+            this.dgLithPheno.CellDoubleClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgLithPheno_CellDoubleClick);
             // 
             // btnCancelMinPhe
             // 
@@ -1621,16 +1621,16 @@
             // 
             // dgAlterations
             // 
-            dataGridViewCellStyle30.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(192)))));
-            this.dgAlterations.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle30;
+            dataGridViewCellStyle5.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(192)))));
+            this.dgAlterations.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle5;
             this.dgAlterations.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dgAlterations.Location = new System.Drawing.Point(4, 180);
             this.dgAlterations.Name = "dgAlterations";
             this.dgAlterations.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
             this.dgAlterations.Size = new System.Drawing.Size(685, 195);
             this.dgAlterations.TabIndex = 18;
-            this.dgAlterations.CellDoubleClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgAlterations_CellDoubleClick);
             this.dgAlterations.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgAlterations_CellClick);
+            this.dgAlterations.CellDoubleClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgAlterations_CellDoubleClick);
             // 
             // panel6
             // 
@@ -1833,16 +1833,16 @@
             // 
             // dgSamplesRockMin
             // 
-            dataGridViewCellStyle25.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(192)))));
-            this.dgSamplesRockMin.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle25;
+            dataGridViewCellStyle6.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(192)))));
+            this.dgSamplesRockMin.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle6;
             this.dgSamplesRockMin.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dgSamplesRockMin.Location = new System.Drawing.Point(6, 136);
             this.dgSamplesRockMin.Name = "dgSamplesRockMin";
             this.dgSamplesRockMin.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
             this.dgSamplesRockMin.Size = new System.Drawing.Size(685, 233);
             this.dgSamplesRockMin.TabIndex = 296;
-            this.dgSamplesRockMin.CellDoubleClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgSamplesRockMin_CellDoubleClick);
             this.dgSamplesRockMin.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgSamplesRockMin_CellClick);
+            this.dgSamplesRockMin.CellDoubleClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgSamplesRockMin_CellDoubleClick);
             // 
             // panel11
             // 
@@ -1861,6 +1861,15 @@
             this.panel11.Name = "panel11";
             this.panel11.Size = new System.Drawing.Size(684, 117);
             this.panel11.TabIndex = 299;
+            // 
+            // txtMinPerc
+            // 
+            this.txtMinPerc.Location = new System.Drawing.Point(228, 26);
+            this.txtMinPerc.Name = "txtMinPerc";
+            this.txtMinPerc.Size = new System.Drawing.Size(84, 20);
+            this.txtMinPerc.TabIndex = 279;
+            this.txtMinPerc.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.txtMinPerc_KeyPress);
+            this.txtMinPerc.Leave += new System.EventHandler(this.txtMinPerc_Leave);
             // 
             // btnCancelMin
             // 
@@ -1995,16 +2004,16 @@
             // 
             // dgSamplesRockOxides
             // 
-            dataGridViewCellStyle31.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(192)))));
-            this.dgSamplesRockOxides.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle31;
+            dataGridViewCellStyle7.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(192)))));
+            this.dgSamplesRockOxides.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle7;
             this.dgSamplesRockOxides.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dgSamplesRockOxides.Location = new System.Drawing.Point(6, 144);
             this.dgSamplesRockOxides.Name = "dgSamplesRockOxides";
             this.dgSamplesRockOxides.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
             this.dgSamplesRockOxides.Size = new System.Drawing.Size(681, 224);
             this.dgSamplesRockOxides.TabIndex = 11;
-            this.dgSamplesRockOxides.CellDoubleClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgSamplesRockOxides_CellDoubleClick);
             this.dgSamplesRockOxides.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgSamplesRockOxides_CellClick);
+            this.dgSamplesRockOxides.CellDoubleClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgSamplesRockOxides_CellDoubleClick);
             // 
             // btnCancelOx
             // 
@@ -2293,16 +2302,16 @@
             // 
             // dgSamplesRockStr
             // 
-            dataGridViewCellStyle32.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(192)))));
-            this.dgSamplesRockStr.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle32;
+            dataGridViewCellStyle8.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(192)))));
+            this.dgSamplesRockStr.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle8;
             this.dgSamplesRockStr.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dgSamplesRockStr.Location = new System.Drawing.Point(5, 163);
             this.dgSamplesRockStr.Name = "dgSamplesRockStr";
             this.dgSamplesRockStr.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
             this.dgSamplesRockStr.Size = new System.Drawing.Size(681, 238);
             this.dgSamplesRockStr.TabIndex = 13;
-            this.dgSamplesRockStr.CellDoubleClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgSamplesRockStr_CellDoubleClick);
             this.dgSamplesRockStr.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgSamplesRockStr_CellClick);
+            this.dgSamplesRockStr.CellDoubleClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgSamplesRockStr_CellDoubleClick);
             // 
             // label94
             // 
@@ -2590,6 +2599,7 @@
             this.cmbSample.Size = new System.Drawing.Size(137, 21);
             this.cmbSample.TabIndex = 2;
             this.cmbSample.SelectedIndexChanged += new System.EventHandler(this.cmbSample_SelectedIndexChanged);
+            this.cmbSample.Leave += new System.EventHandler(this.cmbSample_Leave);
             // 
             // label1
             // 
@@ -2604,17 +2614,8 @@
             // 
             this.bgw.WorkerReportsProgress = true;
             this.bgw.DoWork += new System.ComponentModel.DoWorkEventHandler(this.bgw_DoWork);
-            this.bgw.RunWorkerCompleted += new System.ComponentModel.RunWorkerCompletedEventHandler(this.bgw_RunWorkerCompleted);
             this.bgw.ProgressChanged += new System.ComponentModel.ProgressChangedEventHandler(this.bgw_ProgressChanged);
-            // 
-            // txtMinPerc
-            // 
-            this.txtMinPerc.Location = new System.Drawing.Point(228, 26);
-            this.txtMinPerc.Name = "txtMinPerc";
-            this.txtMinPerc.Size = new System.Drawing.Size(84, 20);
-            this.txtMinPerc.TabIndex = 279;
-            this.txtMinPerc.Leave += new System.EventHandler(this.txtMinPerc_Leave);
-            this.txtMinPerc.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.txtMinPerc_KeyPress);
+            this.bgw.RunWorkerCompleted += new System.ComponentModel.RunWorkerCompletedEventHandler(this.bgw_RunWorkerCompleted);
             // 
             // frmRock
             // 

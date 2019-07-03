@@ -4220,7 +4220,6 @@ namespace Geochemistry
         {
             try
             {
-
                 oCh.iSKCHChannels = Int64.Parse(dgDataCh.Rows[index].Cells["SKCHChannels"].Value.ToString());
                 sEditCh = "1";
 
@@ -4264,11 +4263,8 @@ namespace Geochemistry
                    dgDataCh.Rows[index].Cells["Date_Survey"].Value.ToString() == string.Empty
                    ? DateTime.Now.ToShortDateString()
                    : dTimerDateSur.Text = Convert.ToDateTime(dgDataCh.Rows[index].Cells["Date_Survey"].Value).ToString("dd/MM/yyyy");
-
-
+                
                 txtTotalSamples.Text = dgDataCh.Rows[index].Cells["SamplesTotal"].Value.ToString();
-
-
             }
             catch (Exception ex)
             {
