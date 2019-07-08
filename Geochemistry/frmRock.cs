@@ -29,7 +29,8 @@ namespace Geochemistry
         static string sEditOxid = "0";
         static string sEditStr = "0";
         static string sMineLoc = "0";
-        static string sExport = ""; 
+        static string sExport = "";
+        private bool swCargado = false;
 
         public frmRock()
         {
@@ -58,6 +59,7 @@ namespace Geochemistry
                 cmbSample.ValueMember = "sample";
                 cmbSample.DataSource = dtSamples;
                 cmbSample.SelectedValue = "Select an option..";
+                swCargado = true;
 
                 #endregion
 
@@ -3200,7 +3202,7 @@ namespace Geochemistry
 
         private void cmbSample_Leave(object sender, EventArgs e)
         {
-            if (!cmbSample.Text.Contains("Select"))
+            if (swCargado)
             {
                 LoadDataRocks(cmbSample.Text);
 
