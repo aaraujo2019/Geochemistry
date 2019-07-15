@@ -576,7 +576,7 @@ namespace Geochemistry
 
                 //Para capturar la fecha en el formato correcto
                 Thread.CurrentThread.CurrentCulture = new CultureInfo("en-US");
-                DateTime dDate = DateTime.Parse(dtimeDate.Text.ToString());
+                DateTime dDate = dtimeDate.Value;
                 string sDate = dDate.Year.ToString().PadLeft(4, '0') + dDate.Month.ToString().PadLeft(2, '0') +
                     dDate.Day.ToString().PadLeft(2, '0');
 
