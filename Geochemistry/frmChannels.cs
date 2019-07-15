@@ -821,7 +821,7 @@ namespace Geochemistry
 
                 //Para capturar la fecha en el formato correcto
                 Thread.CurrentThread.CurrentCulture = new CultureInfo("en-US");
-                DateTime dDateS = DateTime.Parse(dtStartDateCh.Text.ToString());
+                DateTime dDateS = dtStartDateCh.Value;
                 string sDateS = dDateS.Year.ToString().PadLeft(4, '0') + dDateS.Month.ToString().PadLeft(2, '0') +
                     dDateS.Day.ToString().PadLeft(2, '0');
                 if (sDateS.ToString() == "19000101")
@@ -831,7 +831,7 @@ namespace Geochemistry
 
                 //Para capturar la fecha en el formato correcto
                 Thread.CurrentThread.CurrentCulture = new CultureInfo("en-US");
-                DateTime dDateF = DateTime.Parse(dtFinalDateCh.Text.ToString());
+                DateTime dDateF = dtFinalDateCh.Value;
                 string sDateF = dDateF.Year.ToString().PadLeft(4, '0') + dDateF.Month.ToString().PadLeft(2, '0') +
                     dDateF.Day.ToString().PadLeft(2, '0');
                 if (sDateF.ToString() == "19000101")
@@ -865,7 +865,7 @@ namespace Geochemistry
                     oCh.sInstrument = cmbInstSur.Text.ToString();
                 //public string sInstrument;
 
-                DateTime dDateSurvey = DateTime.Parse(dTimerDateSur.Text.ToString());
+                DateTime dDateSurvey = dTimerDateSur.Value;
                 string sDateSurv = dDateSurvey.Year.ToString().PadLeft(4, '0') + dDateSurvey.Month.ToString().PadLeft(2, '0') +
                     dDateSurvey.Day.ToString().PadLeft(2, '0');
                 if (sDateSurv.ToString() == "19000101")

@@ -453,6 +453,7 @@
             // 
             // txtSample
             // 
+            this.txtSample.CharacterCasing = System.Windows.Forms.CharacterCasing.Upper;
             this.txtSample.Location = new System.Drawing.Point(13, 32);
             this.txtSample.Name = "txtSample";
             this.txtSample.Size = new System.Drawing.Size(96, 21);
