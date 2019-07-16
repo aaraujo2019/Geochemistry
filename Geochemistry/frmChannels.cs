@@ -671,7 +671,6 @@ namespace Geochemistry
         {
             try
             {
-
                 txtChId.Text = "";
                 txtLenghtCh.Text = "";
                 txtEastCh.Text = "";
@@ -681,8 +680,8 @@ namespace Geochemistry
                 txtDatumCh.Text = "";
                 txtProjectCh.Text = ConfigurationSettings.AppSettings["IDProjectGC"].ToString();
                 txtClaimCh.Text = "";
-                dtStartDateCh.Text = "1900/01/01";
-                dtFinalDateCh.Text = "1900/01/01";
+                dtStartDateCh.Text = "01/01/1900";
+                dtFinalDateCh.Text = "01/01/1900";
                 //txtPurposeCh.Text = "";
                 txtStorageCh.Text = "";
                 txtSourceCh.Text = "";
@@ -693,9 +692,8 @@ namespace Geochemistry
                 txtTotalSamples.Text = "";
                 sEditCh = "0";
 
-                dTimerDateSur.Text = "1900/01/01";
+                dTimerDateSur.Text = "01/01/1900";
                 cmbInstSur.Text = "TS";
-
             }
             catch (Exception ex)
             {
@@ -779,8 +777,7 @@ namespace Geochemistry
                     MessageBox.Show(sResp.ToString(), "Channels", MessageBoxButtons.OK, MessageBoxIcon.Error);
                     return;
                 }
-
-
+                
                 if (sEditCh == "0")
                 {
                     oCh.sOpcion = "1";
@@ -790,8 +787,7 @@ namespace Geochemistry
                 {
                     oCh.sOpcion = "2";
                 }
-
-
+                
                 oCh.sChId = txtChId.Text.ToString();
 
                 if (txtEastCh.Text == "")
@@ -821,24 +817,18 @@ namespace Geochemistry
 
                 //Para capturar la fecha en el formato correcto
                 Thread.CurrentThread.CurrentCulture = new CultureInfo("en-US");
-                DateTime dDateS = dtStartDateCh.Value;
-                string sDateS = dDateS.Year.ToString().PadLeft(4, '0') + dDateS.Month.ToString().PadLeft(2, '0') +
-                    dDateS.Day.ToString().PadLeft(2, '0');
-                if (sDateS.ToString() == "19000101")
+
+                if (dtStartDateCh.Text == "01/01/1900")
                     oCh.sStartDate = null;
                 else
-                    oCh.sStartDate = sDateS.ToString();
+                    oCh.sStartDate = dtStartDateCh.Value.ToShortDateString();
 
                 //Para capturar la fecha en el formato correcto
                 Thread.CurrentThread.CurrentCulture = new CultureInfo("en-US");
-                DateTime dDateF = dtFinalDateCh.Value;
-                string sDateF = dDateF.Year.ToString().PadLeft(4, '0') + dDateF.Month.ToString().PadLeft(2, '0') +
-                    dDateF.Day.ToString().PadLeft(2, '0');
-                if (sDateF.ToString() == "19000101")
-                    oCh.sFinalDate = null;
+                if (dtFinalDateCh.Text == "01/01/1900")
+                    oCh.sStartDate = null;
                 else
-                    oCh.sFinalDate = sDateF.ToString();
-
+                    oCh.sStartDate = dtFinalDateCh.Value.ToShortDateString();
 
                 //oCh.sPurpose = txtPurposeCh.Text.ToString();
                 oCh.sStorage = txtStorageCh.Text.ToString();
@@ -865,15 +855,12 @@ namespace Geochemistry
                     oCh.sInstrument = cmbInstSur.Text.ToString();
                 //public string sInstrument;
 
-                DateTime dDateSurvey = dTimerDateSur.Value;
-                string sDateSurv = dDateSurvey.Year.ToString().PadLeft(4, '0') + dDateSurvey.Month.ToString().PadLeft(2, '0') +
-                    dDateSurvey.Day.ToString().PadLeft(2, '0');
-                if (sDateSurv.ToString() == "19000101")
-                    oCh.sDate_Survey = null;
+                Thread.CurrentThread.CurrentCulture = new CultureInfo("en-US");
+                if (dTimerDateSur.Text == "01/01/1900")
+                    oCh.sStartDate = null;
                 else
-                    oCh.sDate_Survey = sDateSurv.ToString();
-                //public string sDate_Survey;
-
+                    oCh.sStartDate = dTimerDateSur.Value.ToShortDateString();
+              
                 if (txtTotalSamples.Text.ToString() == "")
                     oCh.iSamplesTotal = null;
                 else
@@ -952,8 +939,6 @@ namespace Geochemistry
 
 
                 txtTotalSamples.Text = dgDataCh.Rows[e.RowIndex].Cells["SamplesTotal"].Value.ToString();
-
-
             }
             catch (Exception ex)
             {
