@@ -107,7 +107,7 @@ public class clsGCSamplesRock
             arr[8].ParameterName = "@Date";
             if (sDate == null)
                 arr[8].Value = System.Data.SqlTypes.SqlString.Null;
-            else arr[8].Value = sDate;
+            else arr[8].Value = Convert.ToDateTime(sDate);
             //@E numeric(18,3),
             arr[9].ParameterName = "@E";
             if (dCoordE == null)

@@ -573,9 +573,6 @@ namespace Geochemistry
                 oGCRock.sHelper = txtHelper.Text.ToString();
                 oGCRock.sStation = txtStation.Text.ToString();
 
-
-                //Para capturar la fecha en el formato correcto
-                Thread.CurrentThread.CurrentCulture = new CultureInfo("en-US");
                 DateTime dDate = dtimeDate.Value;
                 string sDate = dDate.Year.ToString().PadLeft(4, '0') + dDate.Month.ToString().PadLeft(2, '0') +
                     dDate.Day.ToString().PadLeft(2, '0');
@@ -1012,7 +1009,7 @@ namespace Geochemistry
             try
             {
                 AddHeaderLithology();
-
+                btnCancel_Click(null, null);
             }
             catch (Exception ex)
             {

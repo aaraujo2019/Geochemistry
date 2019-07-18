@@ -94,12 +94,12 @@ public class clsCHChannels
             arr[10].ParameterName = "@Star_Date";
             if (sStartDate == null)
                 arr[10].Value = System.Data.SqlTypes.SqlString.Null;
-            else arr[10].Value = sStartDate;
+            else arr[10].Value = Convert.ToDateTime(sStartDate);
 
             arr[11].ParameterName = "@Final_Date";
             if (sFinalDate == null)
                 arr[11].Value = System.Data.SqlTypes.SqlString.Null;
-            else arr[11].Value = sFinalDate;
+            else arr[11].Value = Convert.ToDateTime( sFinalDate);
 
             arr[12].ParameterName = "@Storage";
             if (sStorage == null)
@@ -142,7 +142,7 @@ public class clsCHChannels
             arr[19].ParameterName = "@Date_Survey";
             if (sDate_Survey == null)
                 arr[19].Value = System.Data.SqlTypes.SqlString.Null;
-            else arr[19].Value = sDate_Survey;
+            else arr[19].Value = Convert.ToDateTime(sDate_Survey);
 
             arr[20].ParameterName = "@SamplesTotal";
             if (iSamplesTotal == null)

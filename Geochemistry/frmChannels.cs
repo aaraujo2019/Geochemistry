@@ -815,20 +815,15 @@ namespace Geochemistry
                 oCh.sProject = txtProjectCh.Text.ToString();
                 oCh.sClaim = txtClaimCh.Text.ToString();
 
-                //Para capturar la fecha en el formato correcto
-                Thread.CurrentThread.CurrentCulture = new CultureInfo("en-US");
-
                 if (dtStartDateCh.Text == "01/01/1900")
                     oCh.sStartDate = null;
                 else
                     oCh.sStartDate = dtStartDateCh.Value.ToShortDateString();
 
-                //Para capturar la fecha en el formato correcto
-                Thread.CurrentThread.CurrentCulture = new CultureInfo("en-US");
                 if (dtFinalDateCh.Text == "01/01/1900")
-                    oCh.sStartDate = null;
+                    oCh.sFinalDate = null;
                 else
-                    oCh.sStartDate = dtFinalDateCh.Value.ToShortDateString();
+                    oCh.sFinalDate = dtFinalDateCh.Value.ToShortDateString();
 
                 //oCh.sPurpose = txtPurposeCh.Text.ToString();
                 oCh.sStorage = txtStorageCh.Text.ToString();
@@ -853,13 +848,11 @@ namespace Geochemistry
                     oCh.sInstrument = null;
                 else
                     oCh.sInstrument = cmbInstSur.Text.ToString();
-                //public string sInstrument;
 
-                Thread.CurrentThread.CurrentCulture = new CultureInfo("en-US");
                 if (dTimerDateSur.Text == "01/01/1900")
-                    oCh.sStartDate = null;
+                    oCh.sDate_Survey = null;
                 else
-                    oCh.sStartDate = dTimerDateSur.Value.ToShortDateString();
+                    oCh.sDate_Survey = dTimerDateSur.Value.ToShortDateString();
               
                 if (txtTotalSamples.Text.ToString() == "")
                     oCh.iSamplesTotal = null;
@@ -873,6 +866,7 @@ namespace Geochemistry
                     LoadChannelId();
                     cmbChannelId.SelectedValue = txtChId.Text.ToString();
                     CleanControls();
+                    btnCancelCh_Click(null, null);
                 }
                 else
                 {
@@ -1435,9 +1429,6 @@ namespace Geochemistry
                 oCHSamp.sHelper = txtHelper.Text.ToString();
                 oCHSamp.sStation = txtStation.Text.ToString();
 
-
-                //Para capturar la fecha en el formato correcto
-                Thread.CurrentThread.CurrentCulture = new CultureInfo("en-US");
                 DateTime dDate = DateTime.Parse(dtimeDate.Value.ToString());
                 string sDate = dDate.Year.ToString().PadLeft(4, '0') + dDate.Month.ToString().PadLeft(2, '0') +
                     dDate.Day.ToString().PadLeft(2, '0');
