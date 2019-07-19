@@ -573,11 +573,12 @@ namespace Geochemistry
                 oGCRock.sHelper = txtHelper.Text.ToString();
                 oGCRock.sStation = txtStation.Text.ToString();
 
-                DateTime dDate = dtimeDate.Value;
-                string sDate = dDate.Year.ToString().PadLeft(4, '0') + dDate.Month.ToString().PadLeft(2, '0') +
-                    dDate.Day.ToString().PadLeft(2, '0');
+                //DateTime dDate = dtimeDate.Value;
+                //string sDate = dDate.Year.ToString().PadLeft(4, '0') + dDate.Month.ToString().PadLeft(2, '0') +
+                //    dDate.Day.ToString().PadLeft(2, '0');
 
-                oGCRock.sDate = sDate.ToString();
+                oGCRock.sDate = dtimeDate.Value.ToString();
+                //sDate.ToString();
 
                 if (txtCoordE.Text.ToString() == "")
                     oGCRock.dCoordE = null;
