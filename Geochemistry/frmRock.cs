@@ -941,7 +941,8 @@ namespace Geochemistry
                 string sResp = oGCRock.GCSamplesRock_Add();
                 if (sResp == "OK")
                 {
-                    
+                    MessageBox.Show("Rock saved successfully.", "Rocks", MessageBoxButtons.OK, MessageBoxIcon.Information);
+
                     dgData.DataSource = LoadDataRocksAll("2");
                     dgData.Columns["SKSamplesRock"].Visible = false;
                     //dgLithology.DataSource = LoadDataRocksAll("2");
@@ -996,7 +997,7 @@ namespace Geochemistry
                 }
                 else
                 {
-                    MessageBox.Show("Save Error" + sResp.ToString(), "Geochemistry", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    MessageBox.Show("Save Error" + sResp.ToString(), "Rocks", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 }
             }
             catch (Exception ex)

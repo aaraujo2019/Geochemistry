@@ -130,5 +130,12 @@ namespace Geochemistry
 
            
         }
+
+        private void MenuMinnGeol_Click(object sender, EventArgs e)
+        {
+            frmMinningGeology minningGeology = new frmMinningGeology();
+            minningGeology.MdiParent = this;
+            minningGeology.Show();
+        }
     }
 }

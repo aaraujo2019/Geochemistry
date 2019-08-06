@@ -59,6 +59,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Emun\Mines.cs" />
     <Compile Include="frmChangeLoggin.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -113,6 +114,12 @@
     <Compile Include="frmSplash.designer.cs">
       <DependentUpon>frmSplash.cs</DependentUpon>
     </Compile>
+    <Compile Include="frmMinningGeology.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frmMinningGeology.Designer.cs">
+      <DependentUpon>frmMinningGeology.cs</DependentUpon>
+    </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <EmbeddedResource Include="frmChangeLoggin.resx">
@@ -141,6 +148,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="frmSplash.resx">
       <DependentUpon>frmSplash.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="frmMinningGeology.resx">
+      <DependentUpon>frmMinningGeology.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>

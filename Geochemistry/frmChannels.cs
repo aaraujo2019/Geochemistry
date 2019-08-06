@@ -171,41 +171,6 @@ namespace Geochemistry
 
                 #endregion
 
-                //DataTable dtLocationC = new DataTable();
-                //dtLocationC.Columns.Add("Key", typeof(String));
-                //dtLocationC.Columns.Add("Value", typeof(String));
-
-
-                //DataRow drConect;
-                //for (int i = 0; i < conf.AppSettings.Settings.Count; i++)
-                //{
-                //    if (conf.AppSettings.Settings.AllKeys[i].ToString().Contains("Loc"))
-                //    {
-
-                //        drConect = dtLocationC.NewRow();
-                //        //drConect["Con"] = ;
-                //        drConect["Key"] = conf.AppSettings.Settings.AllKeys[i].ToString();
-                //        drConect["Value"] =
-                //            conf.AppSettings.Settings[conf.AppSettings.Settings.AllKeys[i].ToString()].Value.ToString();
-                //        dtLocationC.Rows.Add(drConect);
-
-                //        //MessageBox.Show(conf.AppSettings.Settings.AllKeys[i].ToString());
-                //        cmbLocationChannel.Items.Add(conf.AppSettings.Settings.AllKeys[i].ToString());
-                //        string s = conf.AppSettings.Settings[conf.AppSettings.Settings.AllKeys[i].ToString()].Value;
-                //    }
-
-                //}
-
-                //drConect = dtLocationC.NewRow();
-                //drConect["Key"] = "-1";
-                //drConect["Value"] = "Select an option...";
-                //dtLocationC.Rows.Add(drConect);
-
-                //cmbLocationChannel.DisplayMember = "Value";
-                //cmbLocationChannel.ValueMember = "Key";
-                //cmbLocationChannel.DataSource = dtLocationC;
-                //cmbLocationChannel.Text = "Select an option...";
-
                 #region ChannelId
 
                 LoadChannelId();
@@ -1257,7 +1222,8 @@ namespace Geochemistry
                 }
 
                 AddHeaderLithology();
-                LoadCmbSamples();
+                btnCancel_Click(null, null);
+                LoadCmbSamples();               
             }
             catch (Exception ex)
             {
@@ -1665,7 +1631,8 @@ namespace Geochemistry
                 string sResp = oCHSamp.CH_Samples_Add();
                 if (sResp == "OK")
                 {
-                    
+                    MessageBox.Show("Channel saved successfully.", "Channels", MessageBoxButtons.OK, MessageBoxIcon.Information);
+
                     dgData.DataSource = LoadDataCHAll("1");
                     dgData.Columns["SKCHSamples"].Visible = false;
 
@@ -1692,12 +1659,13 @@ namespace Geochemistry
 
                     CleanControlsHeader();
                     sEdit = "0";
-
                 }
                 else
                 {
                     MessageBox.Show("Save Error: " + sResp.ToString(), "Channels", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 }
+
+                
             }
             catch (Exception ex)
             {
@@ -1934,8 +1902,6 @@ namespace Geochemistry
 
                         dgLithology.DataSource = LoadDataCHAll("1");
                         dgLithology.Columns["SKCHSamples"].Visible = false;
-
-                        //CleanControls();
                     }
                     else
                     {

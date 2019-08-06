@@ -186,6 +186,22 @@ public class clsRf
         }
     }
 
+    public DataTable getMineEntranceExplora()
+    {
+        try
+        {
+            DataSet dtData = new DataSet();
+            SqlParameter[] arr = oData.GetParameters(0);
+            dtData = oData.ExecuteDataset("usp_Mi_MineEntrance_Cmb_Explora", arr, CommandType.StoredProcedure);
+            return dtData.Tables[0];
+        }
+        catch (Exception ex)
+        {
+
+            throw new Exception(ex.Message);
+        }
+    }
+
     public DataTable getUsers(string _sUser)
     {
         try

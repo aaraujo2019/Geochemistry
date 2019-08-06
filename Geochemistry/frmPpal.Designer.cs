@@ -38,6 +38,7 @@
             this.rockToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.sedimentToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.channelsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.MenuMinnGeol = new System.Windows.Forms.ToolStripMenuItem();
             this.statusStrip1 = new System.Windows.Forms.StatusStrip();
             this.mnuPpal.SuspendLayout();
             this.SuspendLayout();
@@ -59,20 +60,20 @@
             this.passwordChangeToolStripMenuItem,
             this.logOutToolStripMenuItem});
             this.fileToolStripMenuItem.Name = "fileToolStripMenuItem";
-            this.fileToolStripMenuItem.Size = new System.Drawing.Size(35, 20);
+            this.fileToolStripMenuItem.Size = new System.Drawing.Size(37, 20);
             this.fileToolStripMenuItem.Text = "File";
             // 
             // passwordChangeToolStripMenuItem
             // 
             this.passwordChangeToolStripMenuItem.Name = "passwordChangeToolStripMenuItem";
-            this.passwordChangeToolStripMenuItem.Size = new System.Drawing.Size(160, 22);
+            this.passwordChangeToolStripMenuItem.Size = new System.Drawing.Size(168, 22);
             this.passwordChangeToolStripMenuItem.Text = "Password Change";
             this.passwordChangeToolStripMenuItem.Click += new System.EventHandler(this.passwordChangeToolStripMenuItem_Click);
             // 
             // logOutToolStripMenuItem
             // 
             this.logOutToolStripMenuItem.Name = "logOutToolStripMenuItem";
-            this.logOutToolStripMenuItem.Size = new System.Drawing.Size(160, 22);
+            this.logOutToolStripMenuItem.Size = new System.Drawing.Size(168, 22);
             this.logOutToolStripMenuItem.Text = "Log out";
             this.logOutToolStripMenuItem.Click += new System.EventHandler(this.logOutToolStripMenuItem_Click);
             // 
@@ -82,15 +83,16 @@
             this.soilToolStripMenuItem,
             this.rockToolStripMenuItem,
             this.sedimentToolStripMenuItem,
-            this.channelsToolStripMenuItem});
+            this.channelsToolStripMenuItem,
+            this.MenuMinnGeol});
             this.geochemistryToolStripMenuItem.Name = "geochemistryToolStripMenuItem";
-            this.geochemistryToolStripMenuItem.Size = new System.Drawing.Size(84, 20);
+            this.geochemistryToolStripMenuItem.Size = new System.Drawing.Size(92, 20);
             this.geochemistryToolStripMenuItem.Text = "Geochemistry";
             // 
             // soilToolStripMenuItem
             // 
             this.soilToolStripMenuItem.Name = "soilToolStripMenuItem";
-            this.soilToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.soilToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
             this.soilToolStripMenuItem.Text = "Soil";
             this.soilToolStripMenuItem.Visible = false;
             this.soilToolStripMenuItem.Click += new System.EventHandler(this.soilToolStripMenuItem_Click);
@@ -98,14 +100,14 @@
             // rockToolStripMenuItem
             // 
             this.rockToolStripMenuItem.Name = "rockToolStripMenuItem";
-            this.rockToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.rockToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
             this.rockToolStripMenuItem.Text = "Rock";
             this.rockToolStripMenuItem.Click += new System.EventHandler(this.rockToolStripMenuItem_Click);
             // 
             // sedimentToolStripMenuItem
             // 
             this.sedimentToolStripMenuItem.Name = "sedimentToolStripMenuItem";
-            this.sedimentToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.sedimentToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
             this.sedimentToolStripMenuItem.Text = "Sediment";
             this.sedimentToolStripMenuItem.Visible = false;
             this.sedimentToolStripMenuItem.Click += new System.EventHandler(this.sedimentToolStripMenuItem_Click);
@@ -113,9 +115,16 @@
             // channelsToolStripMenuItem
             // 
             this.channelsToolStripMenuItem.Name = "channelsToolStripMenuItem";
-            this.channelsToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.channelsToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
             this.channelsToolStripMenuItem.Text = "Channels";
             this.channelsToolStripMenuItem.Click += new System.EventHandler(this.channelsToolStripMenuItem_Click);
+            // 
+            // MenuMinnGeol
+            // 
+            this.MenuMinnGeol.Name = "MenuMinnGeol";
+            this.MenuMinnGeol.Size = new System.Drawing.Size(180, 22);
+            this.MenuMinnGeol.Text = "Minning Geology";
+            this.MenuMinnGeol.Click += new System.EventHandler(this.MenuMinnGeol_Click);
             // 
             // statusStrip1
             // 
@@ -140,8 +149,8 @@
             this.Name = "frmPpal";
             this.Text = "GeoChemistry";
             this.WindowState = System.Windows.Forms.FormWindowState.Maximized;
-            this.Load += new System.EventHandler(this.frmPpal_Load);
             this.FormClosed += new System.Windows.Forms.FormClosedEventHandler(this.frmPpal_FormClosed);
+            this.Load += new System.EventHandler(this.frmPpal_Load);
             this.mnuPpal.ResumeLayout(false);
             this.mnuPpal.PerformLayout();
             this.ResumeLayout(false);
@@ -161,5 +170,6 @@
         private System.Windows.Forms.ToolStripMenuItem rockToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem sedimentToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem channelsToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem MenuMinnGeol;
     }
 }
