@@ -2558,7 +2558,7 @@
             this.groupBox2.Controls.Add(this.cmbSample);
             this.groupBox2.Controls.Add(this.label1);
             this.groupBox2.Font = new System.Drawing.Font("Verdana", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.groupBox2.Location = new System.Drawing.Point(274, 10);
+            this.groupBox2.Location = new System.Drawing.Point(273, 10);
             this.groupBox2.Name = "groupBox2";
             this.groupBox2.Size = new System.Drawing.Size(446, 57);
             this.groupBox2.TabIndex = 45;

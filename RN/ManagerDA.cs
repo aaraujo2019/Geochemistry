@@ -15,12 +15,9 @@ namespace DataAccess
         private string GetConectionString()
         {
             //return ConfigurationManager.ConnectionStrings[0].ConnectionString; ;
-            //return ConfigurationManager.AppSettings["SqlProvider"];
-
-            string sConexion = Desencriptar(ConfigurationManager.ConnectionStrings["SqlProvider"].ConnectionString.ToString());
-
-            return ConfigurationSettings.AppSettings["Server"].ToString() + ";" + sConexion; //ConfigurationManager.ConnectionStrings["SqlProvider"].ConnectionString;
-
+            return ConfigurationManager.ConnectionStrings["SqlProvider"].ConnectionString;
+            //string sConexion = Desencriptar(ConfigurationManager.ConnectionStrings["SqlProvider"].ConnectionString.ToString());
+            //return ConfigurationSettings.AppSettings["Server"].ToString() + ";" + sConexion; 
         }
 
         public SqlConnection GetConnection()
