@@ -24,6 +24,9 @@ namespace Geochemistry
         private string minaSeleccionada = string.Empty;
         private string geologoSeleccionado = string.Empty;
         private string tipoCanalSeleccionado = string.Empty;
+        private string channelPrimero = string.Empty;
+        private double chLength = 0; 
+        static string sEditCh = "0";
 
         public frmMinningGeology()
         {
@@ -170,6 +173,16 @@ namespace Geochemistry
             cmbSampleType.DataSource = dtSampleT.Tables[1];
             cmbSampleType.SelectedValue = "ORIGINAL";
 
+            DataRow drT2 = dtSampleT.Tables[2].NewRow();
+            drT2[0] = "-1";
+            drT2[1] = "Select an option..";
+            dtSampleT.Tables[2].Rows.Add(drT2);
+            cmbSamplingType.DisplayMember = "Comb";
+            cmbSamplingType.ValueMember = "Code";
+            cmbSamplingType.DataSource = dtSampleT.Tables[2];
+            cmbSamplingType.SelectedValue = -1;
+
+
             DataTable dtVein = new DataTable();
             dtVein = oRf.getRfVetas_List("");
             DataRow drVein = dtVein.NewRow();
@@ -197,6 +210,8 @@ namespace Geochemistry
             cmbChannelType.DataSource = dtSampleT.Tables[3];
             cmbChannelType.SelectedValue = "-1";
 
+           
+
             DataTable dtChId = new DataTable();
             oCh.sOpcion = "3";
             oCh.sChId = "0";
@@ -220,6 +235,8 @@ namespace Geochemistry
             cmbSample.ValueMember = "Sample";
             cmbSample.DataSource = dtSamp;
             cmbSample.SelectedValue = "Select an option..";
+
+            
 
             if (sSampleSelect != "" && sSampleSelect != "Select an option..")
             {
@@ -266,6 +283,7 @@ namespace Geochemistry
             dgData.Columns.Add("To", "To");
             dgData.Columns.Add("LRock", "Lithology");
             dgData.Columns.Add("VVeinName", "Cutting Width (m)");
+            dgData.Columns.Add("SamplingLocation", "Sampling Location");
             dgData.Columns.Add("LRockObservations", "Description");
             dgData.Columns.Add("DateChann", "Date Channel");
             dgData.AllowUserToDeleteRows = false;
@@ -302,8 +320,8 @@ namespace Geochemistry
 
             dgData.Rows.Add(txtChId.Text, txtSample.Text, cmbSampleType.SelectedValue, txtSamplePlace.Text, 
                             txtMTS.Text, txtFrom.Text, txtTo.Text, cmbLithology.SelectedValue, 
-                            cmbVeinName.SelectedValue.ToString() == "-1" ? string.Empty : cmbVeinName.SelectedValue, 
-                            txtDescription.Text, dtimeDate.Text);
+                            cmbVeinName.SelectedValue.ToString() == "-1" ? string.Empty : cmbVeinName.SelectedValue,
+                            cmbSamplingType.SelectedValue, txtDescription.Text, dtimeDate.Text);
         }
         
         private void cmbMineEntrance_SelectedIndexChanged(object sender, EventArgs e)
@@ -329,13 +347,148 @@ namespace Geochemistry
 
         private void btnAdd_Click(object sender, EventArgs e)
         {
-            sampleExtradido = 0;
-            cantMuestras = 0;
-            conteoMuestras = 0;
-            swActualizarRegistro = false;
-            indexRegistroGrid = 0;
-            sFrom = 0;
-            sTo = 0;
+            try
+            {
+                if (sEditCh == "0")
+                {
+                    oCh.sOpcion = "1";
+                    oCh.iSKCHChannels = 0;
+                }
+                else if (sEditCh == "1")
+                {
+                    oCh.sOpcion = "2";
+                }
+
+                oCh.sChId = channelPrimero;
+                oCh.dEast = null;
+                oCh.dNorth = null;
+                oCh.dElevation = null;
+                oCh.dLenght = chLength;
+                oCh.sProjection = string.Empty;
+                oCh.sDatum = string.Empty;
+                oCh.sProject = "GZC";
+                oCh.sClaim = string.Empty;
+
+                oCh.sStartDate = Convert.ToDateTime(dtimeDate.Text).ToShortDateString();
+                oCh.sFinalDate = Convert.ToDateTime(dtimeDate.Text).ToShortDateString();
+
+                oCh.sStorage = string.Empty;
+                oCh.sSource = string.Empty;
+
+                oCh.sComments = txtDescription.Text;
+                oCh.sMineID = minaSeleccionada;
+                oCh.sType = tipoCanalSeleccionado;
+                oCh.sInstrument = tipoCanalSeleccionado;
+
+                if (cantMuestras == 0)
+                    oCh.iSamplesTotal = null;
+                else
+                    oCh.iSamplesTotal = cantMuestras;
+
+
+                string sRespAdd = oCh.CH_Collars_Add();
+                if (sRespAdd == "OK")
+                {
+                    for (int i = 0; i < dgData.RowCount - 1; i++)
+                    {
+                        if (sEditCh == "0")
+                        {
+                            oCHSamp.sOpcion = "1";
+                            oCHSamp.iSKCHSamples = 0;
+                        }
+                        else if (sEditCh == "1")
+                        {
+                            oCHSamp.sOpcion = "2";
+                        }
+
+                        oCHSamp.sChId = dgData.Rows[i].Cells[0].Value.ToString();
+                        oCHSamp.sSample = dgData.Rows[i].Cells[1].Value.ToString();
+                        oCHSamp.dFrom = double.Parse(dgData.Rows[i].Cells[5].Value.ToString());
+                        oCHSamp.dTo = double.Parse(dgData.Rows[i].Cells[6].Value.ToString());
+                        oCHSamp.sTarget = dgData.Rows[i].Cells[8].Value.ToString();
+                        oCHSamp.sProject = "GZC";
+                        oCHSamp.sGeologist = geologoSeleccionado;
+                        oCHSamp.sHelper = string.Empty;
+                        oCHSamp.sStation = string.Empty;
+
+                        DateTime dDate = DateTime.Parse(dgData.Rows[i].Cells[11].Value.ToString());
+                        string sDate = dDate.Year.ToString().PadLeft(4, '0') + dDate.Month.ToString().PadLeft(2, '0') +
+                            dDate.Day.ToString().PadLeft(2, '0');
+
+                        oCHSamp.sDate = sDate.ToString();
+                        oCHSamp.dE = null;                       
+                        oCHSamp.dN = null;                   
+                        oCHSamp.dZ = null;
+                        oCHSamp.dE2 = null;                 
+                        oCHSamp.dN2 = null;                  
+                        oCHSamp.dZ2 = null;                  
+                        oCHSamp.sCS = null;                  
+                        oCHSamp.dGPSEpe = null;                  
+                        oCHSamp.sPhoto = null;                 
+                        oCHSamp.sPhotoAzimuth = null;
+                        oCHSamp.sSampleType = dgData.Rows[i].Cells[2].Value.ToString();
+                        oCHSamp.sSamplingType = dgData.Rows[i].Cells[9].Value.ToString() == "-99" ? null : dgData.Rows[i].Cells[9].Value.ToString();
+                        oCHSamp.sPorpouse = null;
+                        oCHSamp.sRelativeLoc = null;
+                        oCHSamp.dLenght = dgData.Rows[i].Cells[6].Value.ToString() == "-99" ? 0 : (double.Parse(dgData.Rows[i].Cells[6].Value.ToString()) - double.Parse(dgData.Rows[i].Cells[5].Value.ToString()));
+                        
+                        oCHSamp.dHigh = null;                       
+                        oCHSamp.sThickness = null;                       
+                        oCHSamp.sObservations = dgData.Rows[i].Cells[10].Value.ToString();
+                        oCHSamp.sLRock = dgData.Rows[i].Cells[7].Value.ToString();
+                        oCHSamp.sLTexture = null;        
+                        oCHSamp.sLGSize = null; 
+                        oCHSamp.sLWeathering = null;
+                        oCHSamp.sLRockSorting = null;
+                        oCHSamp.sLRockSphericity = null;
+                        oCHSamp.sLRockRounding = null;
+                        oCHSamp.sLRockObservation = null;
+                        oCHSamp.sLMatrixGSize = null;
+                        oCHSamp.sLMatrixObservations = null;
+                        oCHSamp.sLMatrixPerc = null;
+                        oCHSamp.sLPhenoCPerc = null;
+                        oCHSamp.sLPhenoCGSize = null;
+                        oCHSamp.sLPhenoCObservations = null; 
+                        oCHSamp.sVContactType = null;
+                        oCHSamp.sVVeinName = dgData.Rows[i].Cells[8].Value.ToString();
+                        oCHSamp.sVHostRock = null;
+                        oCHSamp.sVObservations = null;
+                        oCHSamp.sDupOf = null;
+                        oCHSamp.bValited = false;
+                        oCHSamp.iSampleCont = null;
+
+                        string sResp = oCHSamp.CH_Samples_Add();
+                        if (sResp == "OK")
+                        {
+                            sEditCh = "0";
+                        }
+                        else
+                        {
+                            MessageBox.Show("Save Error: " + sResp.ToString(), "Minning Geology", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                        }
+                    }
+
+                    MessageBox.Show("Channels saved successfully.", "Minning Geology", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    CleanControls();
+                    sampleExtradido = 0;
+                    cantMuestras = 0;
+                    conteoMuestras = 0;
+                    swActualizarRegistro = false;
+                    indexRegistroGrid = 0;
+                    sFrom = 0;
+                    sTo = 0;
+                }
+                else
+                {
+                    MessageBox.Show("We have problems saving your information.", "Minning Geology", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                    sEditCh = "0";
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(string.Concat( "Error: ", ex.Message), "Minning Geology", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                sEditCh = "0";
+            }    
         }
 
         private void txtChId_Leave(object sender, EventArgs e)
@@ -351,6 +504,7 @@ namespace Geochemistry
                 else
                 {
                     txtChId.Enabled = false;
+                    channelPrimero = txtChId.Text;
                     int i = 0;
                     string respuesta = string.Empty;
 
@@ -460,6 +614,7 @@ namespace Geochemistry
 
                 if (cantMuestras == conteoMuestras)
                 {
+                    chLength = sTo;
                     btnAgregate.Enabled = false;
                     LimpiarControles();
                     return;
@@ -488,7 +643,8 @@ namespace Geochemistry
                 dgData.Rows[index].Cells[6].Value = txtTo.Text;
                 dgData.Rows[index].Cells[7].Value = cmbLithology.SelectedValue;
                 dgData.Rows[index].Cells[8].Value = cmbVeinName.SelectedValue;
-                dgData.Rows[index].Cells[9].Value = txtDescription.Text;
+                dgData.Rows[index].Cells[9].Value = cmbSamplingType.SelectedValue;
+                dgData.Rows[index].Cells[10].Value = txtDescription.Text;
 
                 swActualizarRegistro = false;
                 indexRegistroGrid = 0;
@@ -512,9 +668,11 @@ namespace Geochemistry
                 txtSamplePlace.Text = dgData.Rows[e.RowIndex].Cells[3].Value.ToString();
                 cmbLithology.Text = dgData.Rows[e.RowIndex].Cells[7].Value == null ? string.Empty : dgData.Rows[e.RowIndex].Cells[7].Value.ToString();
                 cmbVeinName.Text = dgData.Rows[e.RowIndex].Cells[8].Value == null ? string.Empty : dgData.Rows[e.RowIndex].Cells[8].Value.ToString();
-                txtDescription.Text = dgData.Rows[e.RowIndex].Cells[9].Value.ToString();
-                dtimeDate.Text = Convert.ToDateTime(dgData.Rows[e.RowIndex].Cells[10].Value).ToShortDateString();
+                cmbSamplingType.Text = dgData.Rows[e.RowIndex].Cells[9].Value == null ? string.Empty : dgData.Rows[e.RowIndex].Cells[9].Value.ToString();
+                txtDescription.Text = dgData.Rows[e.RowIndex].Cells[10].Value.ToString();
+                dtimeDate.Text = Convert.ToDateTime(dgData.Rows[e.RowIndex].Cells[11].Value).ToShortDateString();
 
+                sEditCh = "1";
                 swActualizarRegistro = true;
                 indexRegistroGrid = e.RowIndex;
 
