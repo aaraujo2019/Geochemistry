@@ -1,7 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 using System.Data;
 using System.Data.SqlClient;
 
@@ -60,6 +57,8 @@ public class clsCHSamples
     public string sMine, sMineEntrance;
     public bool bValited;
     public int? iSampleCont;
+    public string sSamp1;
+    public string sSamp2;
 
     public string CH_Samples_Add()
     {
@@ -445,6 +444,28 @@ public class clsCHSamples
         }
     }
 
+
+    public DataTable getCHSamplesListchIdSample()
+    {
+        try
+        {
+            DataSet dtCHSamp = new DataSet();
+            SqlParameter[] arr = oData.GetParameters(3);
+            arr[0].ParameterName = "@Samp1";
+            arr[0].Value = sSamp1;
+            arr[1].ParameterName = "@Samp2";
+            arr[1].Value = sSamp2;
+            arr[2].ParameterName = "@ChID";
+            arr[2].Value = sChId;
+            dtCHSamp = oData.ExecuteDataset("usp_CH_Samples_ListSample", arr, CommandType.StoredProcedure);
+            return dtCHSamp.Tables[0];
+
+        }
+        catch (Exception eX)
+        {
+            throw new Exception("Error in getCHSamplesListchIdSample: " + eX.Message);
+        }
+    }
 
 }
 

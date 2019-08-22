@@ -28,11 +28,13 @@
         /// </summary>
         private void InitializeComponent()
         {
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle7 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle8 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle9 = new System.Windows.Forms.DataGridViewCellStyle();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(frmMinningGeology));
             this.grPrincipal = new System.Windows.Forms.GroupBox();
+            this.cmbSamplingType = new System.Windows.Forms.ComboBox();
+            this.label43 = new System.Windows.Forms.Label();
             this.txtAuGr = new System.Windows.Forms.TextBox();
             this.label41 = new System.Windows.Forms.Label();
             this.grbArgilica = new System.Windows.Forms.GroupBox();
@@ -56,8 +58,6 @@
             this.label39 = new System.Windows.Forms.Label();
             this.cmbSample = new System.Windows.Forms.ComboBox();
             this.label42 = new System.Windows.Forms.Label();
-            this.txtSamplePlace = new System.Windows.Forms.TextBox();
-            this.label38 = new System.Windows.Forms.Label();
             this.grbPropil = new System.Windows.Forms.GroupBox();
             this.txtPropilS = new System.Windows.Forms.TextBox();
             this.label35 = new System.Windows.Forms.Label();
@@ -148,8 +148,6 @@
             this.btnCancel = new System.Windows.Forms.Button();
             this.btnAdd = new System.Windows.Forms.Button();
             this.pictureBox1 = new System.Windows.Forms.PictureBox();
-            this.cmbSamplingType = new System.Windows.Forms.ComboBox();
-            this.label43 = new System.Windows.Forms.Label();
             this.grPrincipal.SuspendLayout();
             this.grbArgilica.SuspendLayout();
             this.grbSilif.SuspendLayout();
@@ -176,8 +174,6 @@
             this.grPrincipal.Controls.Add(this.dtimeDate);
             this.grPrincipal.Controls.Add(this.label28);
             this.grPrincipal.Controls.Add(this.groupBox9);
-            this.grPrincipal.Controls.Add(this.txtSamplePlace);
-            this.grPrincipal.Controls.Add(this.label38);
             this.grPrincipal.Controls.Add(this.grbPropil);
             this.grPrincipal.Controls.Add(this.groupBox2);
             this.grPrincipal.Controls.Add(this.grbMiner);
@@ -214,9 +210,27 @@
             this.grPrincipal.TabIndex = 0;
             this.grPrincipal.TabStop = false;
             // 
+            // cmbSamplingType
+            // 
+            this.cmbSamplingType.DropDownWidth = 200;
+            this.cmbSamplingType.FormattingEnabled = true;
+            this.cmbSamplingType.Location = new System.Drawing.Point(563, 150);
+            this.cmbSamplingType.Name = "cmbSamplingType";
+            this.cmbSamplingType.Size = new System.Drawing.Size(140, 21);
+            this.cmbSamplingType.TabIndex = 375;
+            // 
+            // label43
+            // 
+            this.label43.AutoSize = true;
+            this.label43.Location = new System.Drawing.Point(560, 134);
+            this.label43.Name = "label43";
+            this.label43.Size = new System.Drawing.Size(94, 13);
+            this.label43.TabIndex = 376;
+            this.label43.Text = "Sampling Location";
+            // 
             // txtAuGr
             // 
-            this.txtAuGr.Location = new System.Drawing.Point(933, 107);
+            this.txtAuGr.Location = new System.Drawing.Point(785, 103);
             this.txtAuGr.Name = "txtAuGr";
             this.txtAuGr.Size = new System.Drawing.Size(81, 20);
             this.txtAuGr.TabIndex = 47;
@@ -225,7 +239,7 @@
             // label41
             // 
             this.label41.AutoSize = true;
-            this.label41.Location = new System.Drawing.Point(930, 90);
+            this.label41.Location = new System.Drawing.Point(782, 86);
             this.label41.Name = "label41";
             this.label41.Size = new System.Drawing.Size(38, 13);
             this.label41.TabIndex = 374;
@@ -373,15 +387,15 @@
             // 
             this.dtimeDate.CustomFormat = "dd/MM/yyyy";
             this.dtimeDate.Format = System.Windows.Forms.DateTimePickerFormat.Custom;
-            this.dtimeDate.Location = new System.Drawing.Point(742, 105);
+            this.dtimeDate.Location = new System.Drawing.Point(563, 103);
             this.dtimeDate.Name = "dtimeDate";
-            this.dtimeDate.Size = new System.Drawing.Size(133, 20);
+            this.dtimeDate.Size = new System.Drawing.Size(141, 20);
             this.dtimeDate.TabIndex = 9;
             // 
             // label28
             // 
             this.label28.AutoSize = true;
-            this.label28.Location = new System.Drawing.Point(739, 86);
+            this.label28.Location = new System.Drawing.Point(560, 84);
             this.label28.Name = "label28";
             this.label28.Size = new System.Drawing.Size(33, 13);
             this.label28.TabIndex = 71;
@@ -409,6 +423,7 @@
             this.cmbChannelId.Name = "cmbChannelId";
             this.cmbChannelId.Size = new System.Drawing.Size(127, 21);
             this.cmbChannelId.TabIndex = 35;
+            this.cmbChannelId.SelectionChangeCommitted += new System.EventHandler(this.cmbChannelId_SelectionChangeCommitted);
             // 
             // label39
             // 
@@ -437,22 +452,6 @@
             this.label42.Size = new System.Drawing.Size(59, 13);
             this.label42.TabIndex = 32;
             this.label42.Text = "Sample :";
-            // 
-            // txtSamplePlace
-            // 
-            this.txtSamplePlace.Location = new System.Drawing.Point(393, 107);
-            this.txtSamplePlace.Name = "txtSamplePlace";
-            this.txtSamplePlace.Size = new System.Drawing.Size(136, 20);
-            this.txtSamplePlace.TabIndex = 7;
-            // 
-            // label38
-            // 
-            this.label38.AutoSize = true;
-            this.label38.Location = new System.Drawing.Point(390, 90);
-            this.label38.Name = "label38";
-            this.label38.Size = new System.Drawing.Size(86, 13);
-            this.label38.TabIndex = 371;
-            this.label38.Text = "Sampling Place: ";
             // 
             // grbPropil
             // 
@@ -1164,25 +1163,25 @@
             // 
             // dgData
             // 
-            dataGridViewCellStyle1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(192)))));
-            this.dgData.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle1;
-            dataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle2.BackColor = System.Drawing.SystemColors.Control;
-            dataGridViewCellStyle2.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            dataGridViewCellStyle2.ForeColor = System.Drawing.SystemColors.WindowText;
-            dataGridViewCellStyle2.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle2.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle2.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.dgData.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle2;
+            dataGridViewCellStyle7.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(192)))));
+            this.dgData.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle7;
+            dataGridViewCellStyle8.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle8.BackColor = System.Drawing.SystemColors.Control;
+            dataGridViewCellStyle8.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle8.ForeColor = System.Drawing.SystemColors.WindowText;
+            dataGridViewCellStyle8.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle8.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle8.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.dgData.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle8;
             this.dgData.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            dataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle3.BackColor = System.Drawing.SystemColors.Window;
-            dataGridViewCellStyle3.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            dataGridViewCellStyle3.ForeColor = System.Drawing.SystemColors.ControlText;
-            dataGridViewCellStyle3.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle3.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle3.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
-            this.dgData.DefaultCellStyle = dataGridViewCellStyle3;
+            dataGridViewCellStyle9.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle9.BackColor = System.Drawing.SystemColors.Window;
+            dataGridViewCellStyle9.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle9.ForeColor = System.Drawing.SystemColors.ControlText;
+            dataGridViewCellStyle9.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle9.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle9.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
+            this.dgData.DefaultCellStyle = dataGridViewCellStyle9;
             this.dgData.Location = new System.Drawing.Point(8, 423);
             this.dgData.Name = "dgData";
             this.dgData.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
@@ -1193,7 +1192,7 @@
             // cmbLithology
             // 
             this.cmbLithology.FormattingEnabled = true;
-            this.cmbLithology.Location = new System.Drawing.Point(565, 105);
+            this.cmbLithology.Location = new System.Drawing.Point(391, 104);
             this.cmbLithology.Name = "cmbLithology";
             this.cmbLithology.Size = new System.Drawing.Size(138, 21);
             this.cmbLithology.TabIndex = 8;
@@ -1201,7 +1200,7 @@
             // label104
             // 
             this.label104.AutoSize = true;
-            this.label104.Location = new System.Drawing.Point(562, 86);
+            this.label104.Location = new System.Drawing.Point(388, 85);
             this.label104.Name = "label104";
             this.label104.Size = new System.Drawing.Size(49, 13);
             this.label104.TabIndex = 360;
@@ -1348,24 +1347,6 @@
             this.pictureBox1.TabIndex = 45;
             this.pictureBox1.TabStop = false;
             // 
-            // cmbSamplingType
-            // 
-            this.cmbSamplingType.DropDownWidth = 200;
-            this.cmbSamplingType.FormattingEnabled = true;
-            this.cmbSamplingType.Location = new System.Drawing.Point(563, 150);
-            this.cmbSamplingType.Name = "cmbSamplingType";
-            this.cmbSamplingType.Size = new System.Drawing.Size(140, 21);
-            this.cmbSamplingType.TabIndex = 375;
-            // 
-            // label43
-            // 
-            this.label43.AutoSize = true;
-            this.label43.Location = new System.Drawing.Point(560, 134);
-            this.label43.Name = "label43";
-            this.label43.Size = new System.Drawing.Size(94, 13);
-            this.label43.TabIndex = 376;
-            this.label43.Text = "Sampling Location";
-            // 
             // frmMinningGeology
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -1492,8 +1473,6 @@
         private System.Windows.Forms.Label label18;
         private System.Windows.Forms.TextBox txtCompPy;
         private System.Windows.Forms.Label label19;
-        private System.Windows.Forms.TextBox txtSamplePlace;
-        private System.Windows.Forms.Label label38;
         private System.Windows.Forms.GroupBox grbPropil;
         private System.Windows.Forms.TextBox txtPropilS;
         private System.Windows.Forms.Label label35;
