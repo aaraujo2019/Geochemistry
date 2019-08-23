@@ -28,11 +28,12 @@
         /// </summary>
         private void InitializeComponent()
         {
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle7 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle8 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle9 = new System.Windows.Forms.DataGridViewCellStyle();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(frmMinningGeology));
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
             this.grPrincipal = new System.Windows.Forms.GroupBox();
+            this.btnExporPDFAll = new System.Windows.Forms.PictureBox();
             this.cmbSamplingType = new System.Windows.Forms.ComboBox();
             this.label43 = new System.Windows.Forms.Label();
             this.txtAuGr = new System.Windows.Forms.TextBox();
@@ -149,6 +150,7 @@
             this.btnAdd = new System.Windows.Forms.Button();
             this.pictureBox1 = new System.Windows.Forms.PictureBox();
             this.grPrincipal.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.btnExporPDFAll)).BeginInit();
             this.grbArgilica.SuspendLayout();
             this.grbSilif.SuspendLayout();
             this.groupBox9.SuspendLayout();
@@ -165,6 +167,7 @@
             // 
             // grPrincipal
             // 
+            this.grPrincipal.Controls.Add(this.btnExporPDFAll);
             this.grPrincipal.Controls.Add(this.cmbSamplingType);
             this.grPrincipal.Controls.Add(this.label43);
             this.grPrincipal.Controls.Add(this.txtAuGr);
@@ -209,6 +212,19 @@
             this.grPrincipal.Size = new System.Drawing.Size(1086, 616);
             this.grPrincipal.TabIndex = 0;
             this.grPrincipal.TabStop = false;
+            // 
+            // btnExporPDFAll
+            // 
+            this.btnExporPDFAll.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
+            this.btnExporPDFAll.Image = ((System.Drawing.Image)(resources.GetObject("btnExporPDFAll.Image")));
+            this.btnExporPDFAll.InitialImage = null;
+            this.btnExporPDFAll.Location = new System.Drawing.Point(978, 309);
+            this.btnExporPDFAll.Margin = new System.Windows.Forms.Padding(2);
+            this.btnExporPDFAll.Name = "btnExporPDFAll";
+            this.btnExporPDFAll.Size = new System.Drawing.Size(37, 37);
+            this.btnExporPDFAll.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
+            this.btnExporPDFAll.TabIndex = 45;
+            this.btnExporPDFAll.TabStop = false;
             // 
             // cmbSamplingType
             // 
@@ -544,6 +560,7 @@
             this.cmbChannelType.Name = "cmbChannelType";
             this.cmbChannelType.Size = new System.Drawing.Size(124, 21);
             this.cmbChannelType.TabIndex = 3;
+            this.cmbChannelType.SelectedIndexChanged += new System.EventHandler(this.cmbChannelType_SelectedIndexChanged);
             // 
             // cmbMineEntrance
             // 
@@ -564,6 +581,7 @@
             this.cmbGeologist.Name = "cmbGeologist";
             this.cmbGeologist.Size = new System.Drawing.Size(174, 21);
             this.cmbGeologist.TabIndex = 2;
+            this.cmbGeologist.SelectedIndexChanged += new System.EventHandler(this.cmbGeologist_SelectedIndexChanged);
             // 
             // label103
             // 
@@ -1128,7 +1146,7 @@
             // 
             // btnAgregate
             // 
-            this.btnAgregate.Location = new System.Drawing.Point(961, 296);
+            this.btnAgregate.Location = new System.Drawing.Point(960, 275);
             this.btnAgregate.Name = "btnAgregate";
             this.btnAgregate.Size = new System.Drawing.Size(75, 23);
             this.btnAgregate.TabIndex = 49;
@@ -1163,30 +1181,31 @@
             // 
             // dgData
             // 
-            dataGridViewCellStyle7.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(192)))));
-            this.dgData.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle7;
-            dataGridViewCellStyle8.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle8.BackColor = System.Drawing.SystemColors.Control;
-            dataGridViewCellStyle8.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            dataGridViewCellStyle8.ForeColor = System.Drawing.SystemColors.WindowText;
-            dataGridViewCellStyle8.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle8.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle8.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.dgData.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle8;
+            dataGridViewCellStyle1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(192)))));
+            this.dgData.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle1;
+            dataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle2.BackColor = System.Drawing.SystemColors.Control;
+            dataGridViewCellStyle2.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle2.ForeColor = System.Drawing.SystemColors.WindowText;
+            dataGridViewCellStyle2.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle2.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle2.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.dgData.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle2;
             this.dgData.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            dataGridViewCellStyle9.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle9.BackColor = System.Drawing.SystemColors.Window;
-            dataGridViewCellStyle9.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            dataGridViewCellStyle9.ForeColor = System.Drawing.SystemColors.ControlText;
-            dataGridViewCellStyle9.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle9.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle9.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
-            this.dgData.DefaultCellStyle = dataGridViewCellStyle9;
+            dataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle3.BackColor = System.Drawing.SystemColors.Window;
+            dataGridViewCellStyle3.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle3.ForeColor = System.Drawing.SystemColors.ControlText;
+            dataGridViewCellStyle3.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle3.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle3.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
+            this.dgData.DefaultCellStyle = dataGridViewCellStyle3;
             this.dgData.Location = new System.Drawing.Point(8, 423);
             this.dgData.Name = "dgData";
             this.dgData.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
             this.dgData.Size = new System.Drawing.Size(1070, 187);
             this.dgData.TabIndex = 294;
+            this.dgData.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgData_CellContentClick);
             this.dgData.CellDoubleClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgData_CellDoubleClick);
             // 
             // cmbLithology
@@ -1304,6 +1323,7 @@
             this.txtMTS.Size = new System.Drawing.Size(95, 20);
             this.txtMTS.TabIndex = 10;
             this.txtMTS.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            this.txtMTS.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.txtMTS_KeyPress);
             this.txtMTS.Leave += new System.EventHandler(this.txtMTS_Leave);
             // 
             // label5
@@ -1361,6 +1381,7 @@
             this.Load += new System.EventHandler(this.MinningGeology_Load);
             this.grPrincipal.ResumeLayout(false);
             this.grPrincipal.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.btnExporPDFAll)).EndInit();
             this.grbArgilica.ResumeLayout(false);
             this.grbArgilica.PerformLayout();
             this.grbSilif.ResumeLayout(false);
@@ -1505,5 +1526,6 @@
         private System.Windows.Forms.Label label42;
         private System.Windows.Forms.ComboBox cmbSamplingType;
         private System.Windows.Forms.Label label43;
+        private System.Windows.Forms.PictureBox btnExporPDFAll;
     }
 }

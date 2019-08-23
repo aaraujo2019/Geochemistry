@@ -1,6 +1,8 @@
 ﻿using Geochemistry.Emun;
 using System;
+using System.ComponentModel;
 using System.Data;
+using System.Globalization;
 using System.Text.RegularExpressions;
 using System.Windows.Forms;
 
@@ -15,8 +17,8 @@ namespace Geochemistry
         private int sampleExtradido = 0;
         private int cantMuestras = 0;
         private int conteoMuestras = 0;
-        private int sFrom = 0;
-        private int sTo = 0;
+        private double sFrom = 0;
+        private double sTo = 0;
         private string sSampleSelect = "";
         private bool swActualizarRegistro = false;
         private int indexRegistroGrid = 0;
@@ -24,12 +26,13 @@ namespace Geochemistry
         private string minaSeleccionada = string.Empty;
         private string geologoSeleccionado = string.Empty;
         private string tipoCanalSeleccionado = string.Empty;
+        private string sampleSeleccionado = string.Empty;
+        private string sampleFaltante = string.Empty;
+
         private string channelPrimero = string.Empty;
         private double chLength = 0; 
         private string sEditCh = "0";
         private int wSKCHChannels = 0;
-        private int wSKCHSamples = 0;
-
 
         public frmMinningGeology()
         {
@@ -62,51 +65,49 @@ namespace Geochemistry
 
         private bool ValidarValores()
         {
-            bool valor = false;
-
             if (Convert.ToInt32(cmbMineEntrance.SelectedValue) == -1)
             {
                 MessageBox.Show("You must select the mine to continue.", "Minning Geology", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                 cmbMineEntrance.Focus();
-                valor = true;
+                return false;
             }
 
-            if (Convert.ToInt32(cmbGeologist.SelectedValue) == -1)
+            if (Convert.ToInt32(cmbGeologist.SelectedValue) == -1 || cmbGeologist.SelectedValue == null)
             {
                 MessageBox.Show("You must select a Geologist to continue.", "Minning Geology", MessageBoxButtons.OK, MessageBoxIcon.Warning);
-                cmbMineEntrance.Focus();
-                valor = true;
+                cmbGeologist.Focus();
+                return false;
             }
 
             if (cmbChannelType.Text == string.Empty)
             {
                 MessageBox.Show("You must select the sampling instrument to continue.", "Minning Geology", MessageBoxButtons.OK, MessageBoxIcon.Warning);
-                cmbMineEntrance.Focus();
-                valor = true;
+                cmbChannelType.Focus();
+                return false;
             }
 
             if (!txtChId.Text.Contains("ES_MI") && !txtChId.Text.Contains("PV_MI") && txtChId.Text.Contains("SK_MI"))
             {
                 MessageBox.Show("You must enter the channel identifier to continue.", "Minning Geology", MessageBoxButtons.OK, MessageBoxIcon.Warning);
-                cmbMineEntrance.Focus();
-                valor = true;
+                txtChId.Focus();
+                return false;
             }
 
             if (txtChId.Text == string.Empty)
             {
                 MessageBox.Show("You must enter the channel identifier to continue.", "Minning Geology", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                 txtChId.Focus();
-                valor = true;
+                return false;
             }
 
             if (txtSample.Text == string.Empty)
             {
                 MessageBox.Show("You must enter the number sample to continue.", "Minning Geology", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                 txtSample.Focus();
-                valor = true;
+                return false;
             }
 
-            return valor;
+            return true;
         }
         #endregion
 
@@ -121,6 +122,7 @@ namespace Geochemistry
             txtSample.Text = string.Empty;
             txtSample.Enabled = true;
             cmbSampleType.SelectedValue = "ORIGINAL";
+            cmbSamplingType.SelectedValue = "-1";
             txtMTS.Text = string.Empty;
             txtFrom.Text = string.Empty;
             txtTo.Text = string.Empty;
@@ -135,8 +137,28 @@ namespace Geochemistry
             channelPrimero = string.Empty;
             chLength = 0;
             wSKCHChannels = 0;
-            wSKCHSamples = 0;
+            sampleFaltante = string.Empty;
         }
+
+        private void LimpiarControlesEditable()
+        {
+            cmbMineEntrance.SelectedValue = "-1";
+            cmbGeologist.SelectedValue = "-1";
+            cmbChannelType.SelectedValue = "-1";
+            txtChId.Text = string.Empty;
+            txtChId.Enabled = true;
+            txtSample.Text = string.Empty;
+            txtSample.Enabled = true;
+            cmbSampleType.SelectedValue = "ORIGINAL";
+            cmbSamplingType.SelectedValue = "-1";
+            txtMTS.Text = string.Empty;
+            txtFrom.Text = string.Empty;
+            txtTo.Text = string.Empty;
+            cmbLithology.SelectedValue = "-1";
+            cmbVeinName.SelectedValue = string.Empty;
+            txtDescription.Text = string.Empty;
+        }
+
 
         private void LimpiarTextboxDinamico(GroupBox groupbox)
         {
@@ -321,7 +343,7 @@ namespace Geochemistry
 
         private void btnAgregate_Click(object sender, EventArgs e)
         {
-            if (ValidarValores()) return;
+            if(!ValidarValores()) return;
 
             minaSeleccionada = cmbMineEntrance.SelectedValue.ToString();
             geologoSeleccionado = cmbGeologist.SelectedValue.ToString();
@@ -329,26 +351,42 @@ namespace Geochemistry
 
             dgData.Rows.Add(txtChId.Text, txtSample.Text, cmbSampleType.SelectedValue, txtMTS.Text, txtFrom.Text, txtTo.Text, cmbLithology.SelectedValue, 
                             cmbVeinName.SelectedValue.ToString() == "-1" ? string.Empty : cmbVeinName.SelectedValue,
-                            cmbSamplingType.SelectedValue, txtDescription.Text, dtimeDate.Text);
+                            cmbSamplingType.SelectedValue.ToString() == "-1" ? string.Empty : cmbSamplingType.SelectedValue, txtDescription.Text, dtimeDate.Text);
+
         }
         
         private void cmbMineEntrance_SelectedIndexChanged(object sender, EventArgs e)
         {
             if (Convert.ToInt32(cmbMineEntrance.SelectedValue) != -1 && swCombo)
             {
-                switch (Convert.ToInt32(cmbMineEntrance.SelectedValue))
+                if (sampleFaltante != string.Empty)
                 {
-                    case (int)Mines.ES:
-                        txtChId.Text = string.Concat(Mines.ES.ToString(), "_MI");
-                        break;
+                    txtChId.Text = channelPrimero;
+                    txtSample.Text = sampleFaltante;
 
-                    case (int)Mines.SK:
-                        txtChId.Text = string.Concat(Mines.SK.ToString(), "_MI");
-                        break;
+                    txtChId.Enabled = false;
+                    txtSample.Enabled = false;
 
-                    case (int)Mines.PV:
-                        txtChId.Text = string.Concat(Mines.PV.ToString(), "_MI");
-                        break;
+                    cmbMineEntrance.SelectedValue = minaSeleccionada;
+                    cmbGeologist.SelectedValue = geologoSeleccionado == string.Empty ? "-1" : geologoSeleccionado;
+                    cmbChannelType.SelectedValue = tipoCanalSeleccionado;
+                }
+                else
+                {
+                    switch (Convert.ToInt32(cmbMineEntrance.SelectedValue))
+                    {
+                        case (int)Mines.ES:
+                            txtChId.Text = string.Concat(Mines.ES.ToString(), "_MI");
+                            break;
+
+                        case (int)Mines.SK:
+                            txtChId.Text = string.Concat(Mines.SK.ToString(), "_MI");
+                            break;
+
+                        case (int)Mines.PV:
+                            txtChId.Text = string.Concat(Mines.PV.ToString(), "_MI");
+                            break;
+                    }
                 }
             }
         }
@@ -407,8 +445,16 @@ namespace Geochemistry
                         }
                         else if (sEditCh == "1")
                         {
-                            oCHSamp.sOpcion = "2";
-                            oCHSamp.iSKCHSamples = Convert.ToInt32(dgData.Rows[i].Cells[11].Value);
+                            if ((dgData.Rows[i].Cells[11].Value == null ? 0 : Convert.ToInt32(dgData.Rows[i].Cells[11].Value)) == 0)
+                            {
+                                oCHSamp.sOpcion = "1";
+                                oCHSamp.iSKCHSamples = 0;
+                            }
+                            else
+                            {
+                                oCHSamp.sOpcion = "2";
+                                oCHSamp.iSKCHSamples = Convert.ToInt32(dgData.Rows[i].Cells[11].Value);
+                            }                         
                         }
 
                         oCHSamp.sChId = dgData.Rows[i].Cells[0].Value.ToString();
@@ -437,15 +483,15 @@ namespace Geochemistry
                         oCHSamp.sPhoto = null;                 
                         oCHSamp.sPhotoAzimuth = null;
                         oCHSamp.sSampleType = dgData.Rows[i].Cells[2].Value.ToString();
-                        oCHSamp.sSamplingType = dgData.Rows[i].Cells[8].Value.ToString() == "-99" ? null : dgData.Rows[i].Cells[8].Value.ToString();
+                        oCHSamp.sSamplingType = dgData.Rows[i].Cells[8].Value.ToString() == string.Empty ? null : dgData.Rows[i].Cells[8].Value.ToString();
                         oCHSamp.sPorpouse = null;
                         oCHSamp.sRelativeLoc = null;
-                        oCHSamp.dLenght = dgData.Rows[i].Cells[6].Value.ToString() == "-99" ? 0 : (double.Parse(dgData.Rows[i].Cells[5].Value.ToString()) - double.Parse(dgData.Rows[i].Cells[4].Value.ToString()));
+                        oCHSamp.dLenght = dgData.Rows[i].Cells[5].Value.ToString() == "-99" ? 0 : (double.Parse(dgData.Rows[i].Cells[5].Value.ToString()) - double.Parse(dgData.Rows[i].Cells[4].Value.ToString()));
                         
                         oCHSamp.dHigh = null;                       
                         oCHSamp.sThickness = null;                       
                         oCHSamp.sObservations = dgData.Rows[i].Cells[9].Value.ToString();
-                        oCHSamp.sLRock = dgData.Rows[i].Cells[6].Value.ToString();
+                        oCHSamp.sLRock = dgData.Rows[i].Cells[6].Value == null ? string.Empty : dgData.Rows[i].Cells[6].Value.ToString();
                         oCHSamp.sLTexture = null;        
                         oCHSamp.sLGSize = null; 
                         oCHSamp.sLWeathering = null;
@@ -460,7 +506,7 @@ namespace Geochemistry
                         oCHSamp.sLPhenoCGSize = null;
                         oCHSamp.sLPhenoCObservations = null; 
                         oCHSamp.sVContactType = null;
-                        oCHSamp.sVVeinName = dgData.Rows[i].Cells[8].Value.ToString();
+                        oCHSamp.sVVeinName = dgData.Rows[i].Cells[8].Value.ToString() == string.Empty ? null : dgData.Rows[i].Cells[8].Value.ToString();
                         oCHSamp.sVHostRock = null;
                         oCHSamp.sVObservations = null;
                         oCHSamp.sDupOf = null;
@@ -484,6 +530,7 @@ namespace Geochemistry
                     sFrom = 0;
                     sTo = 0;
                     sEditCh = "0";
+                    cmbMineEntrance.Focus();
                 }
                 else
                 {
@@ -564,6 +611,8 @@ namespace Geochemistry
 
         private void txtMTS_Leave(object sender, EventArgs e)
         {
+            if(!ValidarValores()) return;
+
             if (cmbSampleType.SelectedValue.ToString() != "-1")
             {
                 if (cmbSampleType.SelectedValue.ToString() == "ORIGINAL")
@@ -577,14 +626,14 @@ namespace Geochemistry
                         {
                             txtFrom.Text = sFrom.ToString();
                             txtTo.Text = txtMTS.Text;
-                            sTo = Convert.ToInt32(txtMTS.Text);
+                            sTo = Convert.ToDouble(txtMTS.Text);
                         }
                         else
                         {
                             txtFrom.Text = sTo.ToString();
-                            sFrom = Convert.ToInt32(txtFrom.Text);
-                            txtTo.Text = (sTo + Convert.ToInt32(txtMTS.Text)).ToString();
-                            sTo = Convert.ToInt32(txtTo.Text);
+                            sFrom = Convert.ToDouble(txtFrom.Text);
+                            txtTo.Text = (sTo + Convert.ToDouble(txtMTS.Text)).ToString();
+                            sTo = Convert.ToDouble(txtTo.Text);
                         }
                     }
                     else
@@ -608,6 +657,12 @@ namespace Geochemistry
                     txtMTS.Text = string.Empty;
                     cmbSampleType.SelectedValue = "-1";
                     cmbSampleType.Focus();
+
+                    if (sampleFaltante != string.Empty)
+                    {
+                        LimpiarControles();
+                        return;
+                    }
 
                     if (sampleExtradido == 0)
                     {
@@ -665,45 +720,13 @@ namespace Geochemistry
             }
         }
 
-        private void dgData_CellDoubleClick(object sender, DataGridViewCellEventArgs e)
-        {
-            if (dgData.Rows.Count > 1)
-            {
-                cmbMineEntrance.SelectedValue = minaSeleccionada;
-                cmbGeologist.SelectedValue = geologoSeleccionado;
-                cmbChannelType.SelectedValue = tipoCanalSeleccionado;
-
-                txtChId.Text = dgData.Rows[e.RowIndex].Cells[0].Value.ToString();
-                txtSample.Text = dgData.Rows[e.RowIndex].Cells[1].Value.ToString();
-                cmbSampleType.Text = dgData.Rows[e.RowIndex].Cells[2].Value.ToString();
-                cmbLithology.Text = dgData.Rows[e.RowIndex].Cells[6].Value == null ? string.Empty : dgData.Rows[e.RowIndex].Cells[6].Value.ToString();
-                cmbVeinName.Text = dgData.Rows[e.RowIndex].Cells[7].Value == null ? string.Empty : dgData.Rows[e.RowIndex].Cells[7].Value.ToString();
-                cmbSamplingType.Text = dgData.Rows[e.RowIndex].Cells[8].Value == null ? string.Empty : dgData.Rows[e.RowIndex].Cells[8].Value.ToString();
-                txtDescription.Text = dgData.Rows[e.RowIndex].Cells[9].Value.ToString();
-                dtimeDate.Text = Convert.ToDateTime(dgData.Rows[e.RowIndex].Cells[10].Value).ToShortDateString();
-                txtFrom.Text = dgData.Rows[e.RowIndex].Cells[4].Value.ToString();
-                txtTo.Text = dgData.Rows[e.RowIndex].Cells[5].Value.ToString();
-
-                if (cmbSampleType.Text != "ORIGINAL")
-                    txtMTS.Enabled = false;
-                else
-                    txtMTS.Enabled = true;
-
-                sEditCh = "1";
-                swActualizarRegistro = true;
-                indexRegistroGrid = e.RowIndex;
-
-                txtChId.Enabled = false;
-                txtSample.Enabled = false;
-            }
-        }
-
         private void cmbSample_SelectionChangeCommitted(object sender, EventArgs e)
         {
             try
             {
                 if (cmbSample.SelectedValue.ToString() != "Select an option..")
                 {
+                    sampleSeleccionado = cmbSample.SelectedValue.ToString();
                     oCHSamp.sSamp1 = cmbSample.SelectedValue.ToString();
                     oCHSamp.sSamp2 = cmbSample.SelectedValue.ToString();
                     oCHSamp.sChId = string.Empty;
@@ -739,6 +762,9 @@ namespace Geochemistry
                     dgData.Rows[rowindex].Selected = true;
                     dgData.CurrentCell = dgData.Rows[rowindex].Cells[1];
                     sEditCh = "1";
+
+                    sampleFaltante = validarConcecutivo() == 0 ? string.Empty : string.Concat("R", validarConcecutivo());
+                    cmbMineEntrance.Focus();
                 }
             }
             catch (Exception ex)
@@ -764,6 +790,7 @@ namespace Geochemistry
                 if (cmbChannelId.SelectedValue.ToString() != "Select an option..")
                 {
                     oCh.sChId = cmbChannelId.SelectedValue.ToString();
+                    channelPrimero = cmbChannelId.SelectedValue.ToString();
                     oCh.sOpcion = "2";
                     DataTable dtCollar = oCh.getCH_Collars();
 
@@ -785,11 +812,151 @@ namespace Geochemistry
                     }
 
                     sEditCh = "1";
-                } 
+                }
+
+                sampleFaltante = string.Concat("R", validarConcecutivo());
+                cmbMineEntrance.Focus();
             }
             catch (Exception ex)
             {
                 MessageBox.Show(string.Concat("An error has occurred: ", ex.Message), "Minning Geology", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+            }
+        }
+
+        private void dgData_CellContentClick(object sender, DataGridViewCellEventArgs e)
+        {
+            if (dgData.Rows.Count > 1)
+            {
+                cmbMineEntrance.SelectedValue = minaSeleccionada;
+                cmbGeologist.SelectedValue = geologoSeleccionado == string.Empty ? "-1" : geologoSeleccionado;
+                cmbChannelType.SelectedValue = tipoCanalSeleccionado;
+
+                txtChId.Text = dgData.Rows[e.RowIndex].Cells[0].Value.ToString();
+                txtSample.Text = dgData.Rows[e.RowIndex].Cells[1].Value.ToString();
+                cmbSampleType.Text = dgData.Rows[e.RowIndex].Cells[2].Value.ToString();
+                cmbLithology.Text = dgData.Rows[e.RowIndex].Cells[6].Value == null ? string.Empty : dgData.Rows[e.RowIndex].Cells[6].Value.ToString();
+                cmbVeinName.Text = dgData.Rows[e.RowIndex].Cells[7].Value == null ? string.Empty : dgData.Rows[e.RowIndex].Cells[7].Value.ToString();
+                cmbSamplingType.Text = dgData.Rows[e.RowIndex].Cells[8].Value == null ? string.Empty : dgData.Rows[e.RowIndex].Cells[8].Value.ToString();
+                txtDescription.Text = dgData.Rows[e.RowIndex].Cells[9].Value.ToString();
+                dtimeDate.Text = Convert.ToDateTime(dgData.Rows[e.RowIndex].Cells[10].Value).ToShortDateString();
+                txtFrom.Text = dgData.Rows[e.RowIndex].Cells[4].Value.ToString();
+                txtTo.Text = dgData.Rows[e.RowIndex].Cells[5].Value.ToString();
+                wSKCHChannels = Convert.ToInt32(dgData.Rows[e.RowIndex].Cells[11].Value);
+
+                if (cmbSampleType.Text != "ORIGINAL")
+                    txtMTS.Enabled = false;
+                else
+                    txtMTS.Enabled = true;
+
+                sEditCh = "1";
+                swActualizarRegistro = true;
+                indexRegistroGrid = e.RowIndex;
+
+                txtChId.Enabled = false;
+                txtSample.Enabled = false;
+            }
+        }
+        
+        private void dgData_CellDoubleClick(object sender, DataGridViewCellEventArgs e)
+        {
+            if (MessageBox.Show("Do you really want to delete the sample?", "Minning Geology", MessageBoxButtons.OKCancel, MessageBoxIcon.Question) == DialogResult.OK)
+            {
+                oCHSamp.iSKCHSamples = Convert.ToInt32(dgData.Rows[e.RowIndex].Cells[11].Value);
+                oCHSamp.CH_Samples_Delete();
+                MessageBox.Show("Channels deleted successfully.", "Minning Geology", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                LlenarDataGrid();
+                LimpiarControlesEditable();
+            }
+        }
+
+        private void LlenarDataGrid()
+        {
+            oCh.sChId = channelPrimero;
+            oCh.sOpcion = "2";
+            DataTable dtCollar = oCh.getCH_Collars();
+
+            oCHSamp.sOpcion = "1";
+            oCHSamp.sChId = channelPrimero;
+            DataTable dgListaSamples = oCHSamp.getCHSamplesByChid();
+
+            wSKCHChannels = Convert.ToInt32(dtCollar.Rows[0][0]);
+            minaSeleccionada = dtCollar.Rows[0][16].ToString();
+            geologoSeleccionado = dgListaSamples.Rows[0][7].ToString();
+            tipoCanalSeleccionado = dtCollar.Rows[0][17].ToString();
+
+            cantMuestras = Convert.ToInt32(dtCollar.Rows[0][20]);
+
+            dgData.Rows.Clear();
+            foreach (DataRow lista in dgListaSamples.Rows)
+            {
+                dgData.Rows.Add(lista[1].ToString(), lista[2].ToString(), lista[21].ToString(), lista[3].ToString() == "-99.00" ? string.Empty : (Convert.ToDouble(lista[4]) - Convert.ToDouble(lista[3])).ToString(),
+                    lista[3].ToString(), lista[4].ToString(), lista[31].ToString(), lista[46].ToString(), lista[22].ToString(), lista[30].ToString(), lista[10].ToString(), lista[0].ToString());
+            }
+
+            sEditCh = "1";
+        }
+
+        private int validarConcecutivo()
+        {
+            int encontrado = 0;
+            int[] valoresSamples = new int[dgData.RowCount - 1];
+
+            for (int i = 0; i < dgData.RowCount - 1; i++)
+            {
+                Match val = Regex.Match(dgData.Rows[i].Cells[1].Value.ToString(), "(\\d+)");
+                valoresSamples[i] = Convert.ToInt32(val.Value);
+            }
+
+            for (int y = 0; y < valoresSamples.Length; y++)
+            {
+                if (y != 0)
+                {
+                    if ((valoresSamples[y] - 1) != valoresSamples[y - 1])
+                    {
+                        encontrado = valoresSamples[y] - 1;
+                    }
+                }  
+            }
+
+            cmbMineEntrance.Focus();
+            return encontrado;
+        }
+
+        private void cmbChannelType_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            if (cmbChannelType.SelectedValue != null && swCombo)
+                tipoCanalSeleccionado = cmbChannelType.SelectedValue.ToString();
+        }
+
+        private void cmbGeologist_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            if (cmbGeologist.SelectedValue != null && swCombo)
+                geologoSeleccionado = cmbGeologist.SelectedValue.ToString();
+        }
+
+        private void txtMTS_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            CultureInfo cc = System.Threading.Thread.CurrentThread.CurrentCulture;
+
+            if (e.KeyChar >= 48 && e.KeyChar <= 57)
+            {
+                e.Handled = false;
+            }
+            else if (e.KeyChar == 8)
+            {
+                e.Handled = false;
+            }
+            else if (e.KeyChar == 13)
+            {
+                e.Handled = false;
+            }
+            else if (e.KeyChar.ToString() == cc.NumberFormat.NumberDecimalSeparator)
+            {
+                e.Handled = false;
+            }
+            else
+            {
+                e.Handled = true;
             }
         }
     }
