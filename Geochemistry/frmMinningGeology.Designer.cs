@@ -225,6 +225,7 @@
             this.btnExporPDFAll.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
             this.btnExporPDFAll.TabIndex = 45;
             this.btnExporPDFAll.TabStop = false;
+            this.btnExporPDFAll.Visible = false;
             // 
             // cmbSamplingType
             // 
