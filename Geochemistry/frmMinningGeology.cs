@@ -374,8 +374,8 @@ namespace Geochemistry
         private void MinningGeology_Load(object sender, EventArgs e)
         {
             Loadcmb();
-            cmbMineEntrance.Focus();
             ColumnasGrid();
+            cmbMineEntrance.Focus();
         }
 
         private void btnCancel_Click(object sender, EventArgs e)
@@ -426,30 +426,35 @@ namespace Geochemistry
                 }
                 else
                 {
-                    switch (Convert.ToInt32(cmbMineEntrance.SelectedValue))
+                    if (sEditCh == "0")
                     {
-                        case (int)Mines.ES:
-                            txtChId.Text = string.Concat(Mines.ES.ToString(), "_MI");
-                            break;
+                        switch (Convert.ToInt32(cmbMineEntrance.SelectedValue))
+                        {
+                            case (int)Mines.ES:
+                                txtChId.Text = string.Concat(Mines.ES.ToString(), "_MI");
+                                break;
 
-                        case (int)Mines.SK:
-                            txtChId.Text = string.Concat(Mines.SK.ToString(), "_MI");
-                            break;
+                            case (int)Mines.SK:
+                                txtChId.Text = string.Concat(Mines.SK.ToString(), "_MI");
+                                break;
 
-                        case (int)Mines.PV:
-                            txtChId.Text = string.Concat(Mines.PV.ToString(), "_MI");
-                            break;
+                            case (int)Mines.PV:
+                                txtChId.Text = string.Concat(Mines.PV.ToString(), "_MI");
+                                break;
+                        }
+                    }
+
+                    if (sEditCh == "1")
+                    {
+                        var concecutivo = validarConcecutivo();
+
+                        valorFinalMasUno = (validarUltimoValor() + 1);
+                        txtChId.Text = channelPrimero;
+                        txtChId_Leave(null, null);
+                        txtSample.Text = string.Concat("R", valorFinalMasUno);
+                        txtSample_Leave(null, null);
                     }
                 }
-
-                if (sEditCh == "1")
-                {
-                    valorFinalMasUno = (validarUltimoValor() + 1);
-                    txtChId.Text = channelPrimero;
-                    txtChId_Leave(null, null);
-                    txtSample.Text = string.Concat("R", valorFinalMasUno);
-                    txtSample_Leave(null, null);
-                } 
             }
         }
 
@@ -627,15 +632,9 @@ namespace Geochemistry
                     int i = 0;
                     string respuesta = string.Empty;
 
-                    respuesta = Microsoft.VisualBasic.Interaction.InputBox("Enter the number of samples: ", "Minning Geology", string.Empty);
-                    if (!int.TryParse(respuesta, out i))
+                    if (sEditCh == "0")
                     {
-                        MessageBox.Show("You must enter numbers only to continue.", "Minning Geology", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                         respuesta = Microsoft.VisualBasic.Interaction.InputBox("Enter the number of samples: ", "Minning Geology", string.Empty);
-                    }
-
-                    if (respuesta == string.Empty)
-                    {
                         if (!int.TryParse(respuesta, out i))
                         {
                             MessageBox.Show("You must enter numbers only to continue.", "Minning Geology", MessageBoxButtons.OK, MessageBoxIcon.Warning);
@@ -644,17 +643,26 @@ namespace Geochemistry
 
                         if (respuesta == string.Empty)
                         {
-                            MessageBox.Show("A single sample has been assigned for the channel.", "Minning Geology", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
-                            cantMuestras = 1;
+                            if (!int.TryParse(respuesta, out i))
+                            {
+                                MessageBox.Show("You must enter numbers only to continue.", "Minning Geology", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                                respuesta = Microsoft.VisualBasic.Interaction.InputBox("Enter the number of samples: ", "Minning Geology", string.Empty);
+                            }
+
+                            if (respuesta == string.Empty)
+                            {
+                                MessageBox.Show("A single sample has been assigned for the channel.", "Minning Geology", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+                                cantMuestras = 1;
+                            }
+                            else
+                            {
+                                cantMuestras = Convert.ToInt32(respuesta);
+                            }
                         }
                         else
                         {
                             cantMuestras = Convert.ToInt32(respuesta);
                         }
-                    }
-                    else
-                    {
-                        cantMuestras = Convert.ToInt32(respuesta);
                     }
 
                     Match val = Regex.Match(txtChId.Text, "(\\d+)");
@@ -671,8 +679,8 @@ namespace Geochemistry
                 if (txtSample.Text.Length <= 1)
                 {
                     MessageBox.Show("You must enter the number sample to continue.", "Minning Geology", MessageBoxButtons.OK, MessageBoxIcon.Warning);
-                    txtChId.Enabled = true;
-                    txtChId.Focus();
+                    txtSample.Enabled = true;
+                    txtSample.Focus();
                     return;
                 }
             }
@@ -896,7 +904,10 @@ namespace Geochemistry
 
                     sampleFaltante = validarConcecutivo() == 0 ? string.Empty : string.Concat("R", validarConcecutivo());
                     valorFinalMasUno = (validarUltimoValor() + 1);
-                    cmbMineEntrance.Focus();
+                    cmbMineEntrance.SelectedValue = minaSeleccionada;
+                    cmbGeologist.SelectedValue = geologoSeleccionado == string.Empty ? "-1" : geologoSeleccionado;
+                    cmbChannelType.SelectedValue = tipoCanalSeleccionado;
+                    cmbSampleType.Focus();
                 }
             }
             catch (Exception ex)
@@ -999,9 +1010,7 @@ namespace Geochemistry
                 CargarComboSampleBusqueda();
             }
         }
-
-
-
+               
         private void LlenarDataGrid()
         {
             oCh.sChId = channelPrimero;
@@ -1118,5 +1127,54 @@ namespace Geochemistry
                 e.Handled = true;
             }
         }
+
+        private void btnExporPDFAll_Click(object sender, EventArgs e)
+        {
+            var dataGrid = GetContentAsDataTable(dgData);
+            FrmRptMinningGeology reporte = new FrmRptMinningGeology(dataGrid);
+            reporte.Show();
+        }
+
+        public DataTable GetContentAsDataTable(DataGridView dgv)
+        {
+            try
+            {
+                if (dgv.ColumnCount == 0) return null;
+                DataTable dtSource = new DataTable();
+                foreach (DataGridViewColumn col in dgv.Columns)
+                {
+                    if (col.Name == string.Empty) continue;
+                    dtSource.Columns.Add(col.Name);
+                    dtSource.Columns[col.Name].Caption = col.HeaderText;
+                }
+
+                dtSource.Columns.Add("NombreMina");
+                dtSource.Columns.Add("NombreGeologo");
+                dtSource.Columns["NombreMina"].Caption = "NombreMina";
+                dtSource.Columns["NombreGeologo"].Caption = "NombreGeologo";
+                
+                if (dtSource.Columns.Count == 0) return null;
+                foreach (DataGridViewRow row in dgv.Rows)
+                {
+                    DataRow drNewRow = dtSource.NewRow();
+                    foreach (DataColumn col in dtSource.Columns)
+                    {
+                        if (col.ColumnName != "NombreMina" && col.ColumnName != "NombreGeologo")
+                            drNewRow[col.ColumnName] = row.Cells[col.ColumnName].Value;
+
+                        if (col.ColumnName == "NombreMina")
+                            drNewRow[col.ColumnName] = cmbMineEntrance.Text.ToUpper();
+
+                        if (col.ColumnName == "NombreGeologo")
+                            drNewRow[col.ColumnName] = cmbGeologist.Text.ToUpper();
+                    }
+
+                    dtSource.Rows.Add(drNewRow);
+                }
+                return dtSource;
+            }
+            catch { return null; }
+        }
+
     }
 }

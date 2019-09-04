@@ -215,17 +215,16 @@
             // 
             // btnExporPDFAll
             // 
-            this.btnExporPDFAll.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
             this.btnExporPDFAll.Image = ((System.Drawing.Image)(resources.GetObject("btnExporPDFAll.Image")));
             this.btnExporPDFAll.InitialImage = null;
-            this.btnExporPDFAll.Location = new System.Drawing.Point(978, 309);
+            this.btnExporPDFAll.Location = new System.Drawing.Point(990, 368);
             this.btnExporPDFAll.Margin = new System.Windows.Forms.Padding(2);
             this.btnExporPDFAll.Name = "btnExporPDFAll";
-            this.btnExporPDFAll.Size = new System.Drawing.Size(37, 37);
+            this.btnExporPDFAll.Size = new System.Drawing.Size(54, 48);
             this.btnExporPDFAll.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
             this.btnExporPDFAll.TabIndex = 45;
             this.btnExporPDFAll.TabStop = false;
-            this.btnExporPDFAll.Visible = false;
+            this.btnExporPDFAll.Click += new System.EventHandler(this.btnExporPDFAll_Click);
             // 
             // cmbSamplingType
             // 
@@ -233,8 +232,8 @@
             this.cmbSamplingType.FormattingEnabled = true;
             this.cmbSamplingType.Location = new System.Drawing.Point(563, 150);
             this.cmbSamplingType.Name = "cmbSamplingType";
-            this.cmbSamplingType.Size = new System.Drawing.Size(140, 21);
-            this.cmbSamplingType.TabIndex = 375;
+            this.cmbSamplingType.Size = new System.Drawing.Size(141, 21);
+            this.cmbSamplingType.TabIndex = 11;
             // 
             // label43
             // 
@@ -550,7 +549,7 @@
             this.groupBox2.Location = new System.Drawing.Point(250, 9);
             this.groupBox2.Name = "groupBox2";
             this.groupBox2.Size = new System.Drawing.Size(486, 66);
-            this.groupBox2.TabIndex = 297;
+            this.groupBox2.TabIndex = 1;
             this.groupBox2.TabStop = false;
             // 
             // cmbChannelType
@@ -961,7 +960,7 @@
             // label11
             // 
             this.label11.AutoSize = true;
-            this.label11.Location = new System.Drawing.Point(390, 133);
+            this.label11.Location = new System.Drawing.Point(389, 133);
             this.label11.Name = "label11";
             this.label11.Size = new System.Drawing.Size(66, 13);
             this.label11.TabIndex = 366;
@@ -1158,10 +1157,10 @@
             // cmbVeinName
             // 
             this.cmbVeinName.FormattingEnabled = true;
-            this.cmbVeinName.Location = new System.Drawing.Point(393, 150);
+            this.cmbVeinName.Location = new System.Drawing.Point(391, 150);
             this.cmbVeinName.Name = "cmbVeinName";
-            this.cmbVeinName.Size = new System.Drawing.Size(136, 21);
-            this.cmbVeinName.TabIndex = 13;
+            this.cmbVeinName.Size = new System.Drawing.Size(138, 21);
+            this.cmbVeinName.TabIndex = 10;
             // 
             // label54
             // 
@@ -1322,7 +1321,7 @@
             this.txtMTS.Location = new System.Drawing.Point(12, 151);
             this.txtMTS.Name = "txtMTS";
             this.txtMTS.Size = new System.Drawing.Size(95, 20);
-            this.txtMTS.TabIndex = 10;
+            this.txtMTS.TabIndex = 12;
             this.txtMTS.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             this.txtMTS.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.txtMTS_KeyPress);
             this.txtMTS.Leave += new System.EventHandler(this.txtMTS_Leave);
@@ -1338,7 +1337,7 @@
             // 
             // btnCancel
             // 
-            this.btnCancel.Location = new System.Drawing.Point(947, 386);
+            this.btnCancel.Location = new System.Drawing.Point(908, 382);
             this.btnCancel.Name = "btnCancel";
             this.btnCancel.Size = new System.Drawing.Size(75, 23);
             this.btnCancel.TabIndex = 51;
@@ -1348,7 +1347,7 @@
             // 
             // btnAdd
             // 
-            this.btnAdd.Location = new System.Drawing.Point(849, 386);
+            this.btnAdd.Location = new System.Drawing.Point(810, 382);
             this.btnAdd.Name = "btnAdd";
             this.btnAdd.Size = new System.Drawing.Size(88, 23);
             this.btnAdd.TabIndex = 50;
