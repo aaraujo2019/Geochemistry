@@ -824,7 +824,7 @@ namespace Geochemistry
                 string sRespAdd = oCh.CH_Collars_Add();
                 if (sRespAdd == "OK")
                 {
-                    MessageBox.Show("Channel saved successfully.", "Channels", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    //MessageBox.Show("Channel saved successfully.", "Channels", MessageBoxButtons.OK, MessageBoxIcon.Information);
                     LoadDgChannels();
                     LoadChannelId();
                     cmbChannelId.SelectedValue = txtChId.Text.ToString();

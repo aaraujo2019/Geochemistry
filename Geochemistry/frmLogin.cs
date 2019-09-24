@@ -16,7 +16,7 @@ namespace Geochemistry
     {
 
         clsRf oRf = new clsRf();
-        //bool bAct = false;
+        bool bAct = false;
 
         public frmLogin()
         {
@@ -108,21 +108,17 @@ namespace Geochemistry
         {
             try
             {
-                //ConfigurationSettings.AppSettings["IDProject"].ToString()
-                //oRf.iIdProject = int.Parse(ConfigurationSettings.AppSettings["IDProject"].ToString());
-                //DataTable dtVers = oRf.getVersionProject();
-                //if (double.Parse( dtVers.Rows[0]["version"].ToString() ) >
-                //    double.Parse(ConfigurationSettings.AppSettings["Version"].ToString()))
-                //{
-
-                //    //bAct = true;
-                //    MessageBox.Show("actualizar");
-                //    this.Close();
-                //    Process.Start(@"C:\ColombiaGold\Geochemistry\Actualizar.bat");
-
-                //}
-
-
+                //ConfigurationSettings.AppSettings["IDProject"].ToString();
+                oRf.iIdProject = int.Parse(ConfigurationSettings.AppSettings["IDProject"].ToString());
+                DataTable dtVers = oRf.getVersionProject();
+                if (double.Parse(dtVers.Rows[0]["version"].ToString()) >
+                    double.Parse(ConfigurationSettings.AppSettings["Version"].ToString()))
+                {
+                    bAct = true;
+                    MessageBox.Show("Actualizar Versión");
+                    this.Close();
+                    Process.Start(@"\\mdesvrfs01\Publica\Aplicaciones\Actualizaciones\Geochemistry.bat");
+                }
             }
             catch (Exception ex)
             {
@@ -132,12 +128,10 @@ namespace Geochemistry
 
         private void frmLogin_FormClosed(object sender, FormClosedEventArgs e)
         {
-            //if (bAct == true)
-            //{
-                
-            //    //bAct = false;
-            //}
-            
+            if (bAct == true)
+            {
+                bAct = false;
+            }
         }
     }
 }

@@ -941,7 +941,7 @@ namespace Geochemistry
                 string sResp = oGCRock.GCSamplesRock_Add();
                 if (sResp == "OK")
                 {
-                    MessageBox.Show("Rock saved successfully.", "Rocks", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    //MessageBox.Show("Rock saved successfully.", "Rocks", MessageBoxButtons.OK, MessageBoxIcon.Information);
 
                     dgData.DataSource = LoadDataRocksAll("2");
                     dgData.Columns["SKSamplesRock"].Visible = false;
@@ -957,8 +957,7 @@ namespace Geochemistry
                             int rowindex = dtSamp.Rows.IndexOf(myRow[0]);
                             dgData.Rows[rowindex].Selected = true;
                             dgData.CurrentCell = dgData.Rows[rowindex].Cells[1];
-
-
+                            
                             DataTable dtData = LoadDataRocksAll("2");
                             // Query the SalesOrderHeader table for orders placed 
                             // after August 8, 2001.
@@ -986,14 +985,13 @@ namespace Geochemistry
                             //int rowindex2 = dtSamp2.Rows.IndexOf(myRow2[0]);
                             //dgLithology.Rows[rowindex2].Selected = true;
                             //dgLithology.CurrentCell = dgLithology.Rows[rowindex2].Cells[1];
-
                         }
                     }
 
                     ControlsClean();
                     sEdit = "0";
 
-                 
+                    btnCancel_Click(null, null);
                 }
                 else
                 {
